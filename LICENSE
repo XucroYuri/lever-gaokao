@@ -1,0 +1,18 @@
+# License
+
+This repository is source-available for noncommercial public-interest use. It is not licensed as unrestricted OSI-defined open source.
+
+本仓库采用“双许可非商用”方案：
+
+1. 文档、Skill、方法论、表格模板、图文资产和除脚本代码外的内容，采用 Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International Public License（CC BY-NC-SA 4.0）。
+   - Full text: `LICENSES/CC-BY-NC-SA-4.0.txt`
+   - Official URL: https://creativecommons.org/licenses/by-nc-sa/4.0/
+
+2. `life-leverage-college-admission/scripts/` 下的脚本代码，采用 PolyForm Noncommercial License 1.0.0。
+   - Full text: `LICENSES/PolyForm-Noncommercial-1.0.0.md`
+   - Official URL: https://polyformproject.org/licenses/noncommercial/1.0.0/
+
+商业高考志愿填报咨询、教育咨询、SaaS、内部商业工具、付费知识产品、付费 Agent 服务、培训课程或其他以营利为目的的使用，均不属于本仓库默认授权范围。需要商业使用时，必须事先取得项目维护者的单独书面授权。
+
+本仓库按“原样”提供，不提供录取结果、法律、教育、就业或人生发展保证。详见 `DISCLAIMER.md` 和 `NONCOMMERCIAL.md`。
+

@@ -1,0 +1,7 @@
+interface:
+  display_name: "人生志愿杠杆"
+  short_description: "高考志愿画像、候选收敛、风险审计与模型边界"
+  default_prompt: "使用 $life-leverage-college-admission 为中国高考考生生成证据驱动、风险可控、兼顾长期人生杠杆的志愿填报建议。"
+
+policy:
+  allow_implicit_invocation: true

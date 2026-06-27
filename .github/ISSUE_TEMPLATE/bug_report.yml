@@ -1,0 +1,25 @@
+name: Bug report / 问题反馈
+description: 报告 Skill、文档或脚本中的问题
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: 问题描述
+      description: 请说明你遇到的问题。不要提交真实考生隐私信息。
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: 复现或证据
+      description: 可贴脱敏样例、命令输出或相关文件路径。
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: 隐私确认
+      options:
+        - label: 我确认没有提交身份证号、准考证号、手机号、完整住址等敏感信息。
+          required: true
+

@@ -1,0 +1,24 @@
+name: Privacy or commercial misuse / 隐私或商业滥用
+description: 报告隐私风险、商业滥用或误导性包装
+title: "[Risk] "
+labels: ["risk", "noncommercial"]
+body:
+  - type: dropdown
+    id: kind
+    attributes:
+      label: 类型
+      options:
+        - 隐私风险
+        - 商业滥用
+        - 误导性录取承诺
+        - 其他责任风险
+    validations:
+      required: true
+  - type: textarea
+    id: detail
+    attributes:
+      label: 说明
+      description: 请尽量脱敏描述，不要公开真实考生个人信息。
+    validations:
+      required: true
+

@@ -1,0 +1,27 @@
+name: Evidence or rule update / 规则与信源更新
+description: 补充省份规则、官方信源或核验路径
+title: "[Evidence] "
+labels: ["evidence", "documentation"]
+body:
+  - type: input
+    id: scope
+    attributes:
+      label: 适用范围
+      placeholder: 例如：四川 2026 本科批 / 全国通用 / 某高校招生章程
+    validations:
+      required: true
+  - type: textarea
+    id: source
+    attributes:
+      label: 官方或权威来源
+      description: 请提供链接、文件名、页码或公告名称。
+    validations:
+      required: true
+  - type: textarea
+    id: change
+    attributes:
+      label: 建议更新
+      description: 说明应更新哪个文档或规则。
+    validations:
+      required: true
+

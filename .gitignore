@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# Local generated data
+*.tmp
+*.temp
+*.bak
+*.log
+*.csv
+*.json
+!package.json
+
+# OS/editor
+.DS_Store
+.vscode/
+.idea/
+
