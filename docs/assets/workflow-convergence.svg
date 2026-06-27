@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="760" viewBox="0 0 1600 760" role="img" aria-label="Lever-GaoKao Agent 工作流与候选池收敛">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f8fbff"/>
+      <stop offset="1" stop-color="#fffaf0"/>
+    </linearGradient>
+    <linearGradient id="line" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#0f9f9a"/>
+      <stop offset=".55" stop-color="#2563eb"/>
+      <stop offset="1" stop-color="#f59e0b"/>
+    </linearGradient>
+    <filter id="shadow" x="-15%" y="-25%" width="130%" height="150%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#0f172a" flood-opacity="0.12"/>
+    </filter>
+    <style>
+      .font{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Noto Sans CJK SC","Microsoft YaHei",Arial,sans-serif}
+      .title{font-size:48px;font-weight:820;fill:#0f172a}
+      .sub{font-size:22px;font-weight:560;fill:#475569}
+      .step{font-size:23px;font-weight:800;fill:#0f172a}
+      .desc{font-size:17px;font-weight:560;fill:#64748b}
+      .label{font-size:18px;font-weight:760}
+    </style>
+  </defs>
+  <rect width="1600" height="760" fill="url(#bg)"/>
+  <text class="font title" x="88" y="90">Agent 工作流与候选池收敛</text>
+  <text class="font sub" x="90" y="128">先高召回，再证据收敛；剔除要留痕，复入要有条件，最终表必须经过风险审计。</text>
+  <path d="M168 248 H1420" stroke="url(#line)" stroke-width="12" stroke-linecap="round"/>
+  <g filter="url(#shadow)">
+    <g transform="translate(92 188)">
+      <circle cx="76" cy="60" r="58" fill="#ffffff" stroke="#99f6e4" stroke-width="3"/>
+      <text class="font label" x="54" y="67" fill="#0f766e">01</text>
+      <text class="font step" x="0" y="156">引导问诊</text>
+      <text class="font desc" x="0" y="184">学生意愿、家庭约束</text>
+    </g>
+    <g transform="translate(282 188)">
+      <circle cx="76" cy="60" r="58" fill="#ffffff" stroke="#bfdbfe" stroke-width="3"/>
+      <text class="font label" x="54" y="67" fill="#1d4ed8">02</text>
+      <text class="font step" x="0" y="156">规则核验</text>
+      <text class="font desc" x="0" y="184">省份规则、招生计划</text>
+    </g>
+    <g transform="translate(472 188)">
+      <circle cx="76" cy="60" r="58" fill="#ffffff" stroke="#ddd6fe" stroke-width="3"/>
+      <text class="font label" x="54" y="67" fill="#6d28d9">03</text>
+      <text class="font step" x="0" y="156">画像路由</text>
+      <text class="font desc" x="0" y="184">录取空间、能力结构</text>
+    </g>
+    <g transform="translate(662 188)">
+      <circle cx="76" cy="60" r="58" fill="#ffffff" stroke="#fed7aa" stroke-width="3"/>
+      <text class="font label" x="54" y="67" fill="#c2410c">04</text>
+      <text class="font step" x="0" y="156">机会雷达</text>
+      <text class="font desc" x="0" y="184">平台、行业、宏观变量</text>
+    </g>
+    <g transform="translate(852 188)">
+      <circle cx="76" cy="60" r="58" fill="#ffffff" stroke="#bbf7d0" stroke-width="3"/>
+      <text class="font label" x="54" y="67" fill="#15803d">05</text>
+      <text class="font step" x="0" y="156">风险审计</text>
+      <text class="font desc" x="0" y="184">调剂、成本、质量</text>
+    </g>
+    <g transform="translate(1042 188)">
+      <circle cx="76" cy="60" r="58" fill="#ffffff" stroke="#fde68a" stroke-width="3"/>
+      <text class="font label" x="54" y="67" fill="#b45309">06</text>
+      <text class="font step" x="0" y="156">报告表格</text>
+      <text class="font desc" x="0" y="184">多方案与志愿排序</text>
+    </g>
+    <g transform="translate(1232 188)">
+      <circle cx="76" cy="60" r="58" fill="#ffffff" stroke="#a5f3fc" stroke-width="3"/>
+      <text class="font label" x="54" y="67" fill="#0891b2">07</text>
+      <text class="font step" x="0" y="156">入学复核</text>
+      <text class="font desc" x="0" y="184">30/90/180 天行动</text>
+    </g>
+  </g>
+  <g transform="translate(130 470)" filter="url(#shadow)">
+    <rect width="1340" height="170" rx="26" fill="#ffffff" stroke="#e2e8f0"/>
+    <text class="font step" x="42" y="52">候选池收敛 ledger</text>
+    <g transform="translate(42 82)">
+      <rect width="210" height="54" rx="16" fill="#ecfeff"/>
+      <text class="font desc" x="26" y="34" fill="#0f766e" font-weight="800">高召回候选池</text>
+      <path d="M226 27 H300" stroke="#94a3b8" stroke-width="4" stroke-linecap="round"/>
+      <path d="M292 18 l18 9 l-18 9Z" fill="#94a3b8"/>
+      <rect x="320" width="190" height="54" rx="16" fill="#eff6ff"/>
+      <text class="font desc" x="352" y="34" fill="#1d4ed8" font-weight="800">硬规则过滤</text>
+      <path d="M526 27 H600" stroke="#94a3b8" stroke-width="4" stroke-linecap="round"/>
+      <path d="M592 18 l18 9 l-18 9Z" fill="#94a3b8"/>
+      <rect x="620" width="200" height="54" rx="16" fill="#f5f3ff"/>
+      <text class="font desc" x="646" y="34" fill="#6d28d9" font-weight="800">剔除/降级留痕</text>
+      <path d="M836 27 H910" stroke="#94a3b8" stroke-width="4" stroke-linecap="round"/>
+      <path d="M902 18 l18 9 l-18 9Z" fill="#94a3b8"/>
+      <rect x="930" width="200" height="54" rx="16" fill="#fff7ed"/>
+      <text class="font desc" x="956" y="34" fill="#c2410c" font-weight="800">漏选/过拟合审计</text>
+      <path d="M1146 27 H1220" stroke="#94a3b8" stroke-width="4" stroke-linecap="round"/>
+      <path d="M1212 18 l18 9 l-18 9Z" fill="#94a3b8"/>
+      <rect x="1240" width="54" height="54" rx="16" fill="#0f172a"/>
+      <text class="font desc" x="1254" y="34" fill="#ffffff" font-weight="900">表</text>
+    </g>
+  </g>
+</svg>

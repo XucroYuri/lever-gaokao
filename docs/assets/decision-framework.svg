@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="760" viewBox="0 0 1600 760" role="img" aria-label="Lever-GaoKao 六轴选择哲学">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#f3faf9"/>
+    </linearGradient>
+    <filter id="shadow" x="-15%" y="-25%" width="130%" height="150%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#0f172a" flood-opacity="0.11"/>
+    </filter>
+    <style>
+      .font{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Noto Sans CJK SC","Microsoft YaHei",Arial,sans-serif}
+      .title{font-size:48px;font-weight:820;fill:#0f172a}
+      .sub{font-size:22px;font-weight:560;fill:#475569}
+      .h{font-size:28px;font-weight:800;fill:#0f172a}
+      .p{font-size:19px;font-weight:560;fill:#475569}
+      .tag{font-size:17px;font-weight:760;fill:#0f766e}
+    </style>
+  </defs>
+  <rect width="1600" height="760" fill="url(#bg)"/>
+  <text class="font title" x="88" y="90">选择哲学六轴</text>
+  <text class="font sub" x="90" y="128">先守住基本盘，再寻找非对称上行；每个选项都要能进入、能承受、能发展、能复核。</text>
+  <g stroke="#cbd5e1" stroke-width="4" stroke-linecap="round" opacity=".9">
+    <path d="M342 252 H600"/>
+    <path d="M806 252 H1064"/>
+    <path d="M342 498 H600"/>
+    <path d="M806 498 H1064"/>
+    <path d="M704 310 V440"/>
+    <path d="M1210 310 V440"/>
+  </g>
+  <g filter="url(#shadow)">
+    <g transform="translate(88 184)">
+      <rect width="254" height="128" rx="18" fill="#ffffff" stroke="#bae6fd"/>
+      <rect x="22" y="22" width="54" height="54" rx="16" fill="#e0f2fe"/>
+      <text class="font tag" x="39" y="58">01</text>
+      <text class="font h" x="94" y="54">安全底线</text>
+      <text class="font p" x="94" y="86">录取概率、成本、调剂下限</text>
+      <text class="font p" x="94" y="112">保底必须真实可接受</text>
+    </g>
+    <g transform="translate(600 184)">
+      <rect width="254" height="128" rx="18" fill="#ffffff" stroke="#bbf7d0"/>
+      <rect x="22" y="22" width="54" height="54" rx="16" fill="#dcfce7"/>
+      <text class="font tag" x="39" y="58" fill="#15803d">02</text>
+      <text class="font h" x="94" y="54">平台杠杆</text>
+      <text class="font p" x="94" y="86">学校层级、行业系统</text>
+      <text class="font p" x="94" y="112">学风、升学和校友网络</text>
+    </g>
+    <g transform="translate(1064 184)">
+      <rect width="254" height="128" rx="18" fill="#ffffff" stroke="#fde68a"/>
+      <rect x="22" y="22" width="54" height="54" rx="16" fill="#fef3c7"/>
+      <text class="font tag" x="39" y="58" fill="#b45309">03</text>
+      <text class="font h" x="94" y="54">地域杠杆</text>
+      <text class="font p" x="94" y="86">城市群、区域折价</text>
+      <text class="font p" x="94" y="112">不把本科城市绑死人生</text>
+    </g>
+    <g transform="translate(88 430)">
+      <rect width="254" height="128" rx="18" fill="#ffffff" stroke="#ddd6fe"/>
+      <rect x="22" y="22" width="54" height="54" rx="16" fill="#ede9fe"/>
+      <text class="font tag" x="39" y="58" fill="#6d28d9">04</text>
+      <text class="font h" x="94" y="54">专业杠杆</text>
+      <text class="font p" x="94" y="86">能力适配、入口可转换</text>
+      <text class="font p" x="94" y="112">第二能力曲线</text>
+    </g>
+    <g transform="translate(600 430)">
+      <rect width="254" height="128" rx="18" fill="#ffffff" stroke="#fed7aa"/>
+      <rect x="22" y="22" width="54" height="54" rx="16" fill="#ffedd5"/>
+      <text class="font tag" x="39" y="58" fill="#c2410c">05</text>
+      <text class="font h" x="94" y="54">执行杠杆</text>
+      <text class="font p" x="94" y="86">GPA、转专业、考研</text>
+      <text class="font p" x="94" y="112">证书、项目、实习</text>
+    </g>
+    <g transform="translate(1064 430)">
+      <rect width="254" height="128" rx="18" fill="#ffffff" stroke="#bfdbfe"/>
+      <rect x="22" y="22" width="54" height="54" rx="16" fill="#dbeafe"/>
+      <text class="font tag" x="39" y="58" fill="#1d4ed8">06</text>
+      <text class="font h" x="94" y="54">长期复核</text>
+      <text class="font p" x="94" y="86">AI、产业、人口、政策</text>
+      <text class="font p" x="94" y="112">触发信号与失败成本</text>
+    </g>
+  </g>
+  <g transform="translate(365 614)">
+    <rect width="870" height="62" rx="31" fill="#0f172a"/>
+    <text class="font" x="48" y="40" font-size="22" font-weight="720" fill="#ffffff">输出不是唯一答案，而是可核验、多方案、带风险边界的志愿组合。</text>
+  </g>
+</svg>
