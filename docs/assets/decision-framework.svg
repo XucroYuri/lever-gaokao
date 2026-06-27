@@ -1,13 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-label="Lever-GaoKao 选择框架：先问清路径，再比较学校城市和专业">
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#fbfdff"/>
-      <stop offset="1" stop-color="#f8fafc"/>
-    </linearGradient>
-    <linearGradient id="line" x1="0" y1="1" x2="1" y2="0">
-      <stop offset="0" stop-color="#0f766e"/>
-      <stop offset="0.55" stop-color="#2563eb"/>
-      <stop offset="1" stop-color="#f59e0b"/>
+    <linearGradient id="topFade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fbfdff" stop-opacity="0.96"/>
+      <stop offset="0.55" stop-color="#fbfdff" stop-opacity="0.75"/>
+      <stop offset="1" stop-color="#fbfdff" stop-opacity="0.12"/>
     </linearGradient>
     <filter id="shadow" x="-18%" y="-24%" width="136%" height="154%">
       <feDropShadow dx="0" dy="18" stdDeviation="24" flood-color="#0f172a" flood-opacity="0.12"/>
@@ -20,15 +16,11 @@
       .cardTitle{font-size:34px;font-weight:840;fill:#0f172a}
       .cardText{font-size:23px;font-weight:590;fill:#56677c}
       .small{font-size:20px;font-weight:700;fill:#64748b}
-      .darkTitle{font-size:31px;font-weight:850;fill:#ffffff}
-      .darkText{font-size:22px;font-weight:620;fill:#cbd5e1}
     </style>
   </defs>
 
-  <rect width="1600" height="900" fill="url(#bg)"/>
-  <circle cx="1244" cy="152" r="250" fill="#eef6ff"/>
-  <circle cx="1346" cy="744" r="218" fill="#fff2cf"/>
-  <circle cx="208" cy="744" r="248" fill="#e7fbf4"/>
+  <image href="backgrounds/decision-framework-bg.png" width="1600" height="900" preserveAspectRatio="xMidYMid slice"/>
+  <rect width="1600" height="330" fill="url(#topFade)"/>
 
   <g transform="translate(92 76)">
     <text class="font kicker" x="0" y="0">CHOICE FRAMEWORK</text>
@@ -37,7 +29,7 @@
   </g>
 
   <g transform="translate(104 250)" filter="url(#shadow)">
-    <rect width="420" height="304" rx="34" fill="#ffffff"/>
+    <rect width="420" height="304" rx="34" fill="#ffffff" fill-opacity="0.92"/>
     <rect x="28" y="28" width="74" height="74" rx="24" fill="#ecfeff"/>
     <text class="font" x="50" y="76" font-size="27" font-weight="850" fill="#0f766e">01</text>
     <text class="font cardTitle" x="126" y="72">城市就业型</text>
@@ -47,7 +39,7 @@
   </g>
 
   <g transform="translate(590 250)" filter="url(#shadow)">
-    <rect width="420" height="304" rx="34" fill="#ffffff"/>
+    <rect width="420" height="304" rx="34" fill="#ffffff" fill-opacity="0.92"/>
     <rect x="28" y="28" width="74" height="74" rx="24" fill="#eff6ff"/>
     <text class="font" x="50" y="76" font-size="27" font-weight="850" fill="#2563eb">02</text>
     <text class="font cardTitle" x="126" y="72">升学跳板型</text>
@@ -57,7 +49,7 @@
   </g>
 
   <g transform="translate(1076 250)" filter="url(#shadow)">
-    <rect width="420" height="304" rx="34" fill="#ffffff"/>
+    <rect width="420" height="304" rx="34" fill="#ffffff" fill-opacity="0.92"/>
     <rect x="28" y="28" width="74" height="74" rx="24" fill="#fffbeb"/>
     <text class="font" x="50" y="76" font-size="27" font-weight="850" fill="#b45309">03</text>
     <text class="font cardTitle" x="126" y="72">特殊平台型</text>
@@ -66,18 +58,8 @@
     <text class="font small" x="42" y="250">要问：上行没兑现，基本盘还行吗？</text>
   </g>
 
-  <g transform="translate(174 628)">
-    <path d="M0 60 C260 -18 466 132 706 60 C918 -4 1096 -6 1252 58" fill="none" stroke="url(#line)" stroke-width="16" stroke-linecap="round"/>
-    <circle cx="0" cy="60" r="17" fill="#0f766e"/>
-    <circle cx="706" cy="60" r="17" fill="#2563eb"/>
-    <circle cx="1252" cy="58" r="17" fill="#f59e0b"/>
-    <text class="font small" x="0" y="118">能不能录上</text>
-    <text class="font small" x="566" y="118">最差结果能不能接受</text>
-    <text class="font small" x="1080" y="118">孩子能不能执行</text>
-  </g>
-
   <g transform="translate(264 786)">
-    <rect width="1072" height="62" rx="31" fill="#0f172a" opacity="0.96"/>
+    <rect width="1072" height="62" rx="31" fill="#0f172a" opacity="0.94"/>
     <text class="font" x="42" y="40" font-size="23" font-weight="760" fill="#ffffff">先选清楚“这条路想解决什么问题”，再比较学校、城市和专业。</text>
   </g>
 </svg>
