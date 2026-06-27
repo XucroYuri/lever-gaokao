@@ -118,20 +118,17 @@ python3 lever-gaokao/scripts/ledger_tool.py validate-candidate-table candidates.
 
 ## 支持项目
 
-如果这个项目对你有帮助，可以自愿赞赏支持后续维护。赞赏不是付费咨询服务，也不构成任何录取结果或填报结果承诺；请不要在转账备注中填写考生姓名、准考证号、手机号等敏感信息。
+<!-- SUPPORT-PROJECT:START -->
+如果这个项目对你有帮助，可以自愿赞赏支持后续维护。赞赏不是付费咨询服务，也不构成任何结果承诺；请不要在转账备注中填写姓名、手机号、证件号等敏感信息。
 
-<table>
-  <tr>
-    <td align="center">
-      <strong>支付宝</strong><br>
-      <img src="docs/assets/sponsor/alipay.png" alt="支付宝公开赞助收款码" width="240">
-    </td>
-    <td align="center">
-      <strong>微信赞赏</strong><br>
-      <img src="docs/assets/sponsor/wechat-reward.png" alt="微信公开赞赏码" width="240">
-    </td>
-  </tr>
-</table>
+<p align="center">
+  <img src="docs/assets/sponsor/alipay-card.png" alt="支付宝赞助二维码" width="260">
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="docs/assets/sponsor/wechat-reward-card.png" alt="微信赞赏二维码" width="260">
+</p>
+
+<p align="center"><strong>时不我待，功不唐捐</strong></p>
+<!-- SUPPORT-PROJECT:END -->
 
 ## 源码开放但非商用
 

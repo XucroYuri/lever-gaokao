@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="760" viewBox="0 0 640 760" role="img" aria-label="微信赞赏二维码">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fffdf6"/>
+      <stop offset="1" stop-color="#fef3c7"/>
+    </linearGradient>
+    <filter id="shadow" x="-16%" y="-18%" width="132%" height="140%">
+      <feDropShadow dx="0" dy="18" stdDeviation="22" flood-color="#0f172a" flood-opacity="0.13"/>
+    </filter>
+    <style>
+      .font{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Noto Sans CJK SC","Microsoft YaHei",Arial,sans-serif}
+      .title{font-size:42px;font-weight:850;fill:#0f172a}
+      .sub{font-size:23px;font-weight:600;fill:#5f4b23}
+      .pill{font-size:22px;font-weight:780;fill:#b7791f}
+    </style>
+  </defs>
+  <rect width="640" height="760" rx="40" fill="url(#bg)"/>
+  <rect x="36" y="36" width="568" height="688" rx="34" fill="#ffffff" filter="url(#shadow)"/>
+  <rect x="80" y="74" width="164" height="52" rx="26" fill="#fff4d6"/>
+  <text class="font pill" x="112" y="108">微信赞赏</text>
+  <text class="font title" x="80" y="176">支持项目</text>
+  <text class="font sub" x="80" y="216">用于开源维护、资料核验和工具改进</text>
+  <rect x="90" y="258" width="460" height="460" rx="28" fill="#ffffff" stroke="#fde68a"/>
+  <image href="wechat-reward.png" x="110" y="278" width="420" height="420" preserveAspectRatio="xMidYMid meet"/>
+</svg>
