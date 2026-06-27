@@ -66,7 +66,7 @@ python3 lever-gaokao/scripts/ledger_tool.py validate-candidate-table candidates.
 
 ![六轴选择哲学](docs/assets/decision-framework.png)
 
-核心不是押中某个“神校”，而是在安全边界内识别当前可进入、基本盘可接受、未来可能被重新定价的结构性机会。
+核心不是押中某个偶然机会，而是在安全边界内识别当前可进入、基本盘可接受、未来可能被重新定价的结构性机会。
 
 ## 运行闭环
 
