@@ -6,27 +6,29 @@
 
 ![Lever-GaoKao 封面](docs/assets/cover.png)
 
-`Lever-GaoKao` 是一个面向中国高考志愿填报的非商用 AI Agent Skill。它帮助考生和家庭把分数、位次、省份规则、院校专业、家庭约束和长期人生机会放进同一张决策地图，而不是只凭热门叙事或焦虑做决定。
+`Lever-GaoKao` 是一个非商用的高考志愿填报辅助项目。它做三件事：先问清孩子和家庭的真实情况，再整理可选学校和专业，最后把每个选择的好处、风险和还要核验的资料说清楚。
+
+它不会替你拍板，也不会保证录取。它更像一个谨慎的助手，帮你少被焦虑、热门说法和零散信息带着走。
 
 `Lever-GaoKao` 是对外品牌名；`lever-gaokao` 是 Skill id、目录名、命令调用名和 GitHub topic。
 
 ## 先看三句话
 
-- 这不是全国院校数据库，也不是已校准的录取概率模型。
-- 正式填报必须以省级考试院、高校招生网、招生章程和官方志愿系统为准。
-- 本项目强调“多方案 + 证据 + 风险审计”，不制造唯一正确答案。
+- 它不能代替省级考试院、高校招生网、招生章程和官方志愿系统。
+- 它不是全国院校数据库，也不能给出精确录取概率。
+- 它的重点是给出几条可选方向，并把依据、风险和下一步核验说清楚。
 
 ## 项目来源
 
-这个项目来自一次真实的 2025 年高考志愿填报实践：一名选择空间不宽的考生，在 AI Agent 辅助下从数百个候选院校和专业路径中反复扩展、筛选、降级、复核，最终选择了一个基本盘稳妥、同时具备结构性上行空间的方案。结果不是“神预测”，而是验证了一个朴素方法：先守住录取和可接受底线，再寻找非对称的人生杠杆机会。
+这个项目来自一次真实的 2025 年高考志愿填报实践：一名选择空间不宽的考生，需要在省内热门选择和全国范围的低估机会之间做取舍。我们用 AI Agent 辅助整理了数百个候选学校和专业方向，反复比较、排除、复核，最终选择了一个录取把握较稳、长期机会也不错的方案。
 
-具体个案不可复制，但方法可以沉淀：用 Agent 管理候选池、信源、规则、风险、家庭约束和长期路径，而不是让考生在信息噪音里独自下注。
+这个结果不是“神预测”，也不能照搬到别人身上。但它说明了一件事：只要把学校清单、资料来源、排除理由、家庭约束和未来路径记清楚，志愿填报就不必只靠印象、焦虑和跟风。
 
 ## 适合谁
 
 - 高考考生、家长、老师和公益志愿填报协助者。
-- 使用 Codex、Claude Code、Cursor、Kimi Code、OpenCode、Gemini CLI、Qwen Code、Aider、Cline/Roo Code、Continue、Zed/Zcoe、Windsurf、GitHub Copilot Coding Agent、Trae 等工具的人。
-- 不满足于“热门城市 + 热门专业 + 唯一推荐”，希望获得可核验、多视角、可执行建议的人。
+- 会使用 Codex、Claude Code、Cursor、Kimi Code、OpenCode、Gemini CLI、Qwen Code、Aider、Cline/Roo Code、Continue、Zed/Zcoe、Windsurf、GitHub Copilot Coding Agent、Trae 等工具的人。
+- 不想只听“热门城市 + 热门专业 + 一个标准答案”，希望把选择讲清楚、想明白的人。
 
 ## 怎么开始
 
@@ -34,17 +36,17 @@
 
 至少准备：省份、年份、选科/科类、分数、位次、批次、预算、不可接受项、学生本人偏好、家庭约束。
 
-只给“省份 + 分数”时，Agent 只能粗筛，并应优先追问位次、选科、批次和关键限制。
+只给“省份 + 分数”时，只能先粗看。最好补上位次、选科、批次和不能接受的学校/地区/专业。
 
-### 2. 让 Agent 读取 Skill
+### 2. 会用 Agent 工具的人这样做
 
 Codex 用户可以使用：
 
 ```text
-使用 $lever-gaokao 为一名中国高考考生生成证据驱动、风险可控、兼顾长期人生杠杆的志愿填报建议。
+请使用 $lever-gaokao，先问清资料，再为一名中国高考考生生成有依据、讲风险、兼顾长期机会的志愿填报建议。
 ```
 
-通用 Agent 用户可以让工具先读取 [Skill 入口](lever-gaokao/SKILL.md)，再按路由读取 `references/`。不要一次性把所有文档塞进上下文。
+其他 Agent 工具可以先读取 [Skill 入口](lever-gaokao/SKILL.md)，再按需要读取 `references/`。不要一次性把所有文档塞进去。
 
 ### 3. 有表格时跑机械校验
 
@@ -54,39 +56,40 @@ python3 lever-gaokao/scripts/ledger_tool.py template --output candidates.csv
 python3 lever-gaokao/scripts/ledger_tool.py validate-candidate-table candidates.csv
 ```
 
-脚本只做字段、状态、硬约束和 ledger 校验，不判断学校质量，也不预测录取概率。
+脚本只检查表格字段、状态和明显硬限制，不判断学校好坏，也不预测录取概率。
 
 ## 没有网络代理怎么办
 
-可以使用支持本地文件读取、工具调用或自定义模型 API 的国产/开源 Agent 工具。国内模型可考虑 GLM、DeepSeek、Kimi、Qwen 等；常见方式是选择支持 OpenAI-compatible 接口的工具，配置 `base_url`、`api_key` 和 `model`。
+可以使用支持本地文件读取、工具调用或自定义模型 API 的国产/开源 Agent 工具。国内模型可考虑 GLM、DeepSeek、Kimi、Qwen 等。常见做法是选择支持 OpenAI-compatible 接口的工具，再配置 `base_url`、`api_key` 和 `model`。
 
-如果只能使用网页聊天，也可以复制 [SKILL.md](lever-gaokao/SKILL.md)、[引导式问诊](lever-gaokao/references/guided-intake.md) 和 [输入输出规范](lever-gaokao/references/input-output-schema.md) 的相关片段，让模型先问诊再分析。这样能轻量使用方法论，但无法自动跑候选表脚本。
+如果只能使用网页聊天，也可以复制 [SKILL.md](lever-gaokao/SKILL.md)、[引导式问诊](lever-gaokao/references/guided-intake.md) 和 [输入输出规范](lever-gaokao/references/input-output-schema.md) 的相关片段，让模型先问问题，再做分析。这样也能用上方法论，只是不能自动检查候选表。
 
 ## 选择哲学
 
 ![六轴选择哲学](docs/assets/decision-framework.png)
 
-核心不是押中某个偶然机会，而是在安全边界内识别当前可进入、基本盘可接受、未来可能被重新定价的结构性机会。
+志愿填报不是只追热门，也不是赌运气。更重要的是：这个选择能不能录上、能不能接受，四年后有没有继续升学、就业转向或平台跃迁的空间。
 
-## 运行闭环
+## 它怎么工作
 
 ![Agent 工作流与候选池收敛](docs/assets/workflow-convergence.png)
 
-完整任务会经历：问诊输入、规则核验、画像路由、宏观变量扫描、候选池 ledger、风险审计、子代理审查、报告/表格输出和入学后复核。简单任务会按渐进式披露压缩流程。
+完整分析会先问清情况，再查规则和资料，然后整理候选学校，逐步排除不合适的选择，最后给出报告、表格和入学后的行动建议。简单问题会只走必要步骤。
 
 ## 核心文档
 
 - [Skill 入口](lever-gaokao/SKILL.md)
 - [引导式问诊](lever-gaokao/references/guided-intake.md)
 - [选择哲学与方法论](lever-gaokao/references/methodology.md)
-- [候选池发现与收敛](lever-gaokao/references/candidate-discovery-and-convergence.md)
+- [候选清单发现与筛选](lever-gaokao/references/candidate-discovery-and-convergence.md)
 - [输入输出规范](lever-gaokao/references/input-output-schema.md)
+- [对外表达风格](lever-gaokao/references/communication-style.md)
 - [数据与模型路线图](lever-gaokao/references/data-and-model-roadmap.md)
 - [候选表工具](lever-gaokao/scripts/ledger_tool.py)
 
 ## 不要这样用
 
-- 不要只给一个分数，就要求唯一答案。
+- 不要只给一个分数，就要求它直接拍板。
 - 不要把第三方工具的概率当成官方录取保证。
 - 不要上传身份证号、准考证号、手机号、完整住址等敏感信息。
 - 不要让商业志愿填报机构把本项目包装成付费服务。

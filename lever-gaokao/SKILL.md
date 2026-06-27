@@ -15,7 +15,7 @@ description: "用于中国高考志愿填报、院校专业选择、人生杠杆
 
 把高考志愿填报视为一次受约束的人生杠杆配置。目标是在分数、位次、省份规则、家庭条件、学生能力、画像类型和长期机会之间，生成风险可控、选择丰富、可核验、可执行的多方案建议。
 
-不要制造唯一真值。每个正式建议都必须说明依据、代价、不确定性、风险缓释和入学后的执行动作。
+不要假装只有一个正确答案。每个正式建议都必须说明依据、代价、不确定性、风险缓释和入学后的执行动作。
 
 能力边界：本 Skill 不是全国院校数据库，也不是已回测校准的录取概率模型；没有完整官方招生计划、历史位次、专业组变化和模型回测时，只能输出候选发现、风险审计、情景模拟、概率区间和待核验事项。
 
@@ -41,22 +41,23 @@ description: "用于中国高考志愿填报、院校专业选择、人生杠杆
 7. 用情景表达长期趋势。AI、产业、人口、区域国别、公共治理和交叉学科判断必须包含置信度、触发信号、反向信号和失败成本。
 8. 工具承担机械校验，主 Agent 保留价值判断。脚本 warning 进入风险或待核验，不替代官方资料和最终判断。
 9. 正式报告或志愿表输出前，完成免责声明、信源、候选池 ledger、剔除/降级 ledger、专业组调剂、漏选审计和过拟合审计自检。
-10. 不暴露冗长思维链。对用户展示证据依据、假设变化、风险判断、方案取舍和下一步动作。
+10. 对外表达要说人话。快速粗筛、家长沟通和正式报告摘要优先读取 `references/communication-style.md`，先讲结论和影响，再讲证据和表格。
+11. 不暴露冗长思维链。对用户展示证据依据、假设变化、风险判断、方案取舍和下一步动作。
 
 ## 渐进式披露路由
 
-按用户问题选择最少必要 reference。路由表决定先读什么；只有用户要求完整报告、最终志愿表、大规模候选收敛或多轮审查时，才执行完整链路。
+按用户问题选择最少必要 reference。路由表决定先读什么；只有用户要求完整报告、最终志愿表、大规模候选收敛或多轮审查时，才执行完整流程。
 
 | 用户场景 | 先读取 | 条件触发再读取 |
 | --- | --- | --- |
-| 只给省份/分数/粗略情况 | `references/guided-intake.md`、`references/rules-and-sources.md`、`references/evidence-and-verification.md` | 需要画像时读 `references/persona-map.md`；用户要求推荐方向、只要唯一答案或存在从众/短视风险时读 `references/methodology.md` |
+| 只给省份/分数/粗略情况 | `references/guided-intake.md`、`references/rules-and-sources.md`、`references/evidence-and-verification.md`、`references/communication-style.md` | 需要画像时读 `references/persona-map.md`；用户要求推荐方向、只要一个标准答案或存在从众/短视风险时读 `references/methodology.md` |
 | 建立画像和选择哲学 | `references/guided-intake.md`、`references/persona-map.md`、`references/methodology.md` | 涉及长期趋势时读 `references/macro-dynamics.md` |
 | 全国范围找机会或大规模筛选 | `references/candidate-discovery-and-convergence.md`、`references/evidence-and-verification.md`、`references/strategy-patterns.md`、`references/strategy-candidate-pools.md` | 组合收敛读 `references/strategy-routing-and-portfolio.md` |
 | 用户提供 CSV/表格或 ledger | `references/tooling-and-scripts.md`、`references/candidate-discovery-and-convergence.md` | 先用 `scripts/ledger_tool.py` 做机械校验，再按任务补读策略和输出 reference |
-| 要求最终志愿表或完整报告 | `references/input-output-schema.md`、`references/agent-orchestration.md`、`references/candidate-discovery-and-convergence.md`、`references/strategy-routing-and-portfolio.md` | 需要宏观或候选扩展时补读对应 reference |
+| 要求最终志愿表或完整报告 | `references/input-output-schema.md`、`references/communication-style.md`、`references/agent-orchestration.md`、`references/candidate-discovery-and-convergence.md`、`references/strategy-routing-and-portfolio.md` | 需要宏观或候选扩展时补读对应 reference |
 | 只问宏观专业趋势、价值观或政策导向 | `references/macro-dynamics.md`、`references/evidence-and-verification.md`、`references/guided-intake.md` | 需要落到候选方案时读 `references/strategy-patterns.md`、`references/strategy-routing-and-portfolio.md` |
 | 讨论数据库、外部数据源或概率模型 | `references/data-and-model-roadmap.md`、`references/evidence-and-verification.md` | 需要落到当年填报时读规则、候选池和输出 reference |
-| 已有录取结果或入学后规划 | `references/post-admission-planning.md` | 需要转专业、升学或路径判断时补读 `references/methodology.md` |
+| 已有录取结果或入学后规划 | `references/post-admission-planning.md`、`references/communication-style.md` | 需要转专业、升学或路径判断时补读 `references/methodology.md` |
 | 子代理、多轮审查或压力测试 | `references/agent-orchestration.md` | 需要候选留痕时读 `references/candidate-discovery-and-convergence.md` |
 
 ## 工具触发条件
@@ -71,7 +72,7 @@ description: "用于中国高考志愿填报、院校专业选择、人生杠杆
 
 ## 完整任务执行顺序
 
-完整任务按以下闭环执行；简单场景按渐进式披露压缩。
+完整任务按以下顺序执行；简单问题只走必要步骤。
 
 1. 问诊输入：读取 `references/guided-intake.md`，补齐硬信息、学生偏好、家庭约束、不可接受项、风险偏好和输出格式。
 2. 规则/信源核验：读取 `references/rules-and-sources.md` 与 `references/evidence-and-verification.md`，核验当年规则、志愿单位、招生计划、位次、章程、专业组和证据等级。
@@ -81,7 +82,7 @@ description: "用于中国高考志愿填报、院校专业选择、人生杠杆
 6. 策略收敛：读取 `references/strategy-patterns.md`，按需要补读 `references/strategy-candidate-pools.md` 与 `references/strategy-routing-and-portfolio.md`，完成机会雷达、方案包、组合收敛和排序启发。
 7. 风险审计：审计录取高估、专业组调剂、费用、办学质量、城市适应、学生能力、家庭承受力、捡漏叙事和宏观概念包装。
 8. 子代理/模拟审查：读取 `references/agent-orchestration.md`，按规则、数据、可达性、院校质量、专业组、画像、宏观、漏选和反向风险执行审查；子代理不直接给最终排序。
-9. 报告/表格输出：读取 `references/input-output-schema.md`，同时支持报告型建议、候选表、ledger、审查记录、风险审计和志愿排序表；固定加入信息有效期与免责声明。
+9. 报告/表格输出：读取 `references/input-output-schema.md` 与 `references/communication-style.md`，同时支持报告型建议、候选表、ledger、审查记录、风险审计和志愿排序表；固定加入信息有效期与免责声明。
 10. 入学后规划与动态复核：读取 `references/post-admission-planning.md`，输出 30/90/180 天行动计划、Plan A/B/C、触发信号和复核节点。
 
 ## 停止条件
