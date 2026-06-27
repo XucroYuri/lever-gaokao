@@ -1,91 +1,83 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-label="Lever-GaoKao 方法论地图：短期就业红利与长期升学跃迁">
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-label="Lever-GaoKao 选择框架：先问清路径，再比较学校城市和专业">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#fbfcff"/>
+      <stop offset="0" stop-color="#fbfdff"/>
       <stop offset="1" stop-color="#f8fafc"/>
     </linearGradient>
-    <linearGradient id="frontier" x1="0" y1="1" x2="1" y2="0">
-      <stop offset="0" stop-color="#14b8a6"/>
-      <stop offset=".48" stop-color="#3b82f6"/>
+    <linearGradient id="line" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#0f766e"/>
+      <stop offset="0.55" stop-color="#2563eb"/>
       <stop offset="1" stop-color="#f59e0b"/>
     </linearGradient>
-    <filter id="shadow" x="-18%" y="-28%" width="136%" height="160%">
-      <feDropShadow dx="0" dy="18" stdDeviation="24" flood-color="#0f172a" flood-opacity=".12"/>
+    <filter id="shadow" x="-18%" y="-24%" width="136%" height="154%">
+      <feDropShadow dx="0" dy="18" stdDeviation="24" flood-color="#0f172a" flood-opacity="0.12"/>
     </filter>
     <style>
       .font{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Noto Sans CJK SC","Microsoft YaHei",Arial,sans-serif}
-      .kicker{font-size:22px;font-weight:780;letter-spacing:2px;fill:#0f766e}
-      .title{font-size:62px;font-weight:860;letter-spacing:-.5px;fill:#0f172a}
+      .kicker{font-size:23px;font-weight:780;letter-spacing:2px;fill:#0f766e}
+      .title{font-size:66px;font-weight:860;fill:#0f172a}
       .sub{font-size:26px;font-weight:580;fill:#475569}
-      .axis{font-size:22px;font-weight:750;fill:#334155}
-      .cellTitle{font-size:31px;font-weight:820;fill:#0f172a}
-      .cellText{font-size:20px;font-weight:570;fill:#53657a}
-      .mini{font-size:18px;font-weight:740;fill:#0f766e}
-      .white{fill:#ffffff}
+      .cardTitle{font-size:34px;font-weight:840;fill:#0f172a}
+      .cardText{font-size:23px;font-weight:590;fill:#56677c}
+      .small{font-size:20px;font-weight:700;fill:#64748b}
+      .darkTitle{font-size:31px;font-weight:850;fill:#ffffff}
+      .darkText{font-size:22px;font-weight:620;fill:#cbd5e1}
     </style>
   </defs>
 
   <rect width="1600" height="900" fill="url(#bg)"/>
-  <circle cx="1250" cy="140" r="260" fill="#eef6ff"/>
-  <circle cx="1350" cy="740" r="220" fill="#fff4d9"/>
-  <circle cx="210" cy="740" r="250" fill="#e9fbf5"/>
+  <circle cx="1244" cy="152" r="250" fill="#eef6ff"/>
+  <circle cx="1346" cy="744" r="218" fill="#fff2cf"/>
+  <circle cx="208" cy="744" r="248" fill="#e7fbf4"/>
 
-  <g transform="translate(90 78)">
-    <text class="font kicker" x="0" y="0">DECISION MAP</text>
-    <text class="font title" x="0" y="86">不是选一个学校，而是选择一种路径假设</text>
-    <text class="font sub" x="2" y="128">校名、城市、专业、就业便利都不是唯一真值；先判断学生到底要走哪条主路径。</text>
+  <g transform="translate(92 76)">
+    <text class="font kicker" x="0" y="0">CHOICE FRAMEWORK</text>
+    <text class="font title" x="0" y="88">不是学校好坏题，而是路径取舍题</text>
+    <text class="font sub" x="2" y="132">同一所学校，在不同孩子身上可能是好选择，也可能是错配。</text>
   </g>
 
-  <g transform="translate(130 225)">
-    <rect x="0" y="0" width="900" height="540" rx="36" fill="#ffffff" filter="url(#shadow)"/>
-    <path d="M120 456 H805" stroke="#cbd5e1" stroke-width="3"/>
-    <path d="M120 456 V70" stroke="#cbd5e1" stroke-width="3"/>
-    <path d="M120 456 C255 390 352 330 474 255 C594 181 682 112 805 70" fill="none" stroke="url(#frontier)" stroke-width="18" stroke-linecap="round"/>
-    <circle cx="238" cy="395" r="18" fill="#14b8a6"/>
-    <circle cx="468" cy="258" r="18" fill="#3b82f6"/>
-    <circle cx="705" cy="126" r="18" fill="#f59e0b"/>
-    <text class="font axis" x="82" y="52">非对称上行</text>
-    <text class="font axis" x="26" y="462">安全底线</text>
-    <text class="font axis" x="130" y="512">短期就业便利</text>
-    <text class="font axis" x="650" y="512">长期升学跃迁</text>
-
-    <g transform="translate(166 310)">
-      <rect width="236" height="94" rx="24" fill="#ecfeff"/>
-      <text class="font cellTitle" x="26" y="43">城市就业红利</text>
-      <text class="font cellText" x="26" y="72">实习、校招、毕业季便利</text>
-    </g>
-    <g transform="translate(388 176)">
-      <rect width="260" height="104" rx="24" fill="#eff6ff"/>
-      <text class="font cellTitle" x="26" y="45">升学跳板</text>
-      <text class="font cellText" x="26" y="76">学风、保研考研、导师资源</text>
-    </g>
-    <g transform="translate(562 76)">
-      <rect width="264" height="110" rx="24" fill="#fffbeb"/>
-      <text class="font cellTitle" x="26" y="46">高杠杆观察</text>
-      <text class="font cellText" x="26" y="78">低估平台、结构性上行</text>
-    </g>
-    <g transform="translate(175 110)">
-      <text class="font mini" x="0" y="0">先判断主路径，再谈排序</text>
-      <text class="font cellText" x="0" y="34">就业落地、升学跃迁、体制证照、探索保留</text>
-    </g>
+  <g transform="translate(104 250)" filter="url(#shadow)">
+    <rect width="420" height="304" rx="34" fill="#ffffff"/>
+    <rect x="28" y="28" width="74" height="74" rx="24" fill="#ecfeff"/>
+    <text class="font" x="50" y="76" font-size="27" font-weight="850" fill="#0f766e">01</text>
+    <text class="font cardTitle" x="126" y="72">城市就业型</text>
+    <text class="font cardText" x="42" y="142">看重实习、校招、毕业季便利。</text>
+    <text class="font cardText" x="42" y="184">适合四年后想尽快落地就业。</text>
+    <text class="font small" x="42" y="250">要问：平台和升学机会是否够用？</text>
   </g>
 
-  <g transform="translate(1088 244)" filter="url(#shadow)">
-    <rect width="382" height="400" rx="36" fill="#0f172a"/>
-    <text class="font" x="42" y="62" font-size="30" font-weight="830" fill="#ffffff">每个高杠杆选项</text>
-    <text class="font" x="42" y="103" font-size="30" font-weight="830" fill="#ffffff">都要拆成四件事</text>
-    <g transform="translate(42 154)">
-      <text class="font" x="0" y="0" font-size="24" font-weight="760" fill="#99f6e4">01 基本盘</text>
-      <text class="font" x="0" y="36" font-size="20" font-weight="560" fill="#cbd5e1">不靠故事也能接受</text>
-      <text class="font" x="0" y="92" font-size="24" font-weight="760" fill="#bfdbfe">02 上行假设</text>
-      <text class="font" x="0" y="128" font-size="20" font-weight="560" fill="#cbd5e1">为什么可能被重新定价</text>
-      <text class="font" x="0" y="184" font-size="24" font-weight="760" fill="#fde68a">03 失败成本</text>
-      <text class="font" x="0" y="220" font-size="20" font-weight="560" fill="#cbd5e1">升学失败、就业退路、适应风险</text>
-    </g>
+  <g transform="translate(590 250)" filter="url(#shadow)">
+    <rect width="420" height="304" rx="34" fill="#ffffff"/>
+    <rect x="28" y="28" width="74" height="74" rx="24" fill="#eff6ff"/>
+    <text class="font" x="50" y="76" font-size="27" font-weight="850" fill="#2563eb">02</text>
+    <text class="font cardTitle" x="126" y="72">升学跳板型</text>
+    <text class="font cardText" x="42" y="142">看重学风、保研考研、导师资源。</text>
+    <text class="font cardText" x="42" y="184">适合愿意用四年换下一次跃迁。</text>
+    <text class="font small" x="42" y="250">要问：如果升学失败，退路能否接受？</text>
   </g>
 
-  <g transform="translate(195 805)">
-    <rect width="1210" height="56" rx="28" fill="#ffffff" stroke="#e2e8f0"/>
-    <text class="font" x="42" y="36" font-size="22" font-weight="760" fill="#334155">真正的问题不是“哪个学校看起来更好”，而是“哪条路径假设更适合这个学生承担并执行”。</text>
+  <g transform="translate(1076 250)" filter="url(#shadow)">
+    <rect width="420" height="304" rx="34" fill="#ffffff"/>
+    <rect x="28" y="28" width="74" height="74" rx="24" fill="#fffbeb"/>
+    <text class="font" x="50" y="76" font-size="27" font-weight="850" fill="#b45309">03</text>
+    <text class="font cardTitle" x="126" y="72">特殊平台型</text>
+    <text class="font cardText" x="42" y="142">看重行业、系统、区位或政策窗口。</text>
+    <text class="font cardText" x="42" y="184">适合能接受不确定和阶段性吃苦。</text>
+    <text class="font small" x="42" y="250">要问：上行没兑现，基本盘还行吗？</text>
+  </g>
+
+  <g transform="translate(174 628)">
+    <path d="M0 60 C260 -18 466 132 706 60 C918 -4 1096 -6 1252 58" fill="none" stroke="url(#line)" stroke-width="16" stroke-linecap="round"/>
+    <circle cx="0" cy="60" r="17" fill="#0f766e"/>
+    <circle cx="706" cy="60" r="17" fill="#2563eb"/>
+    <circle cx="1252" cy="58" r="17" fill="#f59e0b"/>
+    <text class="font small" x="0" y="118">能不能录上</text>
+    <text class="font small" x="566" y="118">最差结果能不能接受</text>
+    <text class="font small" x="1080" y="118">孩子能不能执行</text>
+  </g>
+
+  <g transform="translate(264 786)">
+    <rect width="1072" height="62" rx="31" fill="#0f172a" opacity="0.96"/>
+    <text class="font" x="42" y="40" font-size="23" font-weight="760" fill="#ffffff">先选清楚“这条路想解决什么问题”，再比较学校、城市和专业。</text>
   </g>
 </svg>

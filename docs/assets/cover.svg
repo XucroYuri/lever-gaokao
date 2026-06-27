@@ -1,92 +1,95 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-label="Lever-GaoKao 路演封面：人生杠杆・高考志愿填报 Agent">
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-label="Lever-GaoKao 封面：人生杠杆・高考志愿填报 Agent">
   <defs>
-    <linearGradient id="paper" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#fbfcff"/>
-      <stop offset="0.55" stop-color="#f3fbf8"/>
-      <stop offset="1" stop-color="#fff8e8"/>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fbfdff"/>
+      <stop offset="0.58" stop-color="#f3fbf8"/>
+      <stop offset="1" stop-color="#fff7e6"/>
     </linearGradient>
-    <linearGradient id="ink" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#0f172a"/>
-      <stop offset="1" stop-color="#123b46"/>
-    </linearGradient>
-    <linearGradient id="rise" x1="0" y1="1" x2="1" y2="0">
-      <stop offset="0" stop-color="#10b981"/>
+    <linearGradient id="route" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#0f766e"/>
       <stop offset="0.52" stop-color="#2563eb"/>
       <stop offset="1" stop-color="#f59e0b"/>
     </linearGradient>
-    <filter id="softShadow" x="-20%" y="-30%" width="140%" height="170%">
-      <feDropShadow dx="0" dy="22" stdDeviation="28" flood-color="#0f172a" flood-opacity="0.13"/>
+    <linearGradient id="navy" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0f172a"/>
+      <stop offset="1" stop-color="#123b46"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-25%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="22" stdDeviation="28" flood-color="#0f172a" flood-opacity="0.14"/>
     </filter>
-    <pattern id="grid" width="44" height="44" patternUnits="userSpaceOnUse">
-      <path d="M44 0H0V44" fill="none" stroke="#d8e4ee" stroke-width="1" opacity=".45"/>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M48 0H0V48" fill="none" stroke="#dbe7ef" stroke-width="1" opacity="0.45"/>
     </pattern>
     <style>
       .font{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Noto Sans CJK SC","Microsoft YaHei",Arial,sans-serif}
-      .eyebrow{font-size:25px;font-weight:750;letter-spacing:2.5px;fill:#0f766e}
-      .title{font-size:112px;font-weight:850;letter-spacing:-1px;fill:#0f172a}
-      .subtitle{font-size:36px;font-weight:760;fill:#155e75}
-      .claim{font-size:30px;font-weight:760;fill:#172033}
-      .body{font-size:23px;font-weight:560;line-height:1.5;fill:#475569}
-      .small{font-size:20px;font-weight:650;fill:#64748b}
-      .label{font-size:22px;font-weight:800;fill:#0f172a}
-      .tag{font-size:20px;font-weight:760;fill:#0f766e}
+      .eyebrow{font-size:24px;font-weight:760;letter-spacing:2px;fill:#0f766e}
+      .title{font-size:116px;font-weight:860;fill:#0f172a}
+      .subtitle{font-size:38px;font-weight:780;fill:#155e75}
+      .lead{font-size:32px;font-weight:760;fill:#172033}
+      .body{font-size:24px;font-weight:560;fill:#475569}
+      .small{font-size:20px;font-weight:680;fill:#64748b}
+      .cardTitle{font-size:26px;font-weight:830;fill:#0f172a}
+      .cardText{font-size:21px;font-weight:620;fill:#64748b}
+      .pill{font-size:20px;font-weight:760;fill:#0f766e}
     </style>
   </defs>
 
-  <rect width="1600" height="900" fill="url(#paper)"/>
-  <rect width="1600" height="900" fill="url(#grid)" opacity=".55"/>
-  <path d="M0 700 C185 650 285 778 470 700 C680 612 790 485 1010 548 C1240 615 1355 466 1600 490 L1600 900 L0 900Z" fill="#e5f5f0"/>
-  <path d="M0 760 C220 700 350 820 560 746 C800 660 950 690 1165 615 C1350 550 1460 620 1600 578 L1600 900 L0 900Z" fill="#eef5ff" opacity=".95"/>
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <rect width="1600" height="900" fill="url(#grid)" opacity="0.55"/>
+  <path d="M0 660 C190 610 320 708 520 640 C720 572 850 460 1080 530 C1288 594 1420 474 1600 506 L1600 900 L0 900Z" fill="#e8f7f3"/>
+  <path d="M0 746 C230 678 370 812 596 730 C820 650 980 714 1198 626 C1378 552 1500 636 1600 592 L1600 900 L0 900Z" fill="#edf5ff" opacity="0.95"/>
 
-  <g transform="translate(96 96)">
-    <text class="font eyebrow" x="0" y="0">NON-COMMERCIAL AI AGENT SKILL</text>
-    <text class="font title" x="0" y="130">Lever-GaoKao</text>
-    <text class="font subtitle" x="4" y="194">人生杠杆・高考志愿填报 Agent</text>
-    <text class="font claim" x="4" y="282">把志愿填报从一次押注，变成可审计的人生杠杆决策。</text>
-    <text class="font body" x="4" y="340">面向中国高考考生与家庭：先守住录取和可接受底线，</text>
-    <text class="font body" x="4" y="378">再寻找平台、城市、专业、升学与长期机会之间的更优组合。</text>
+  <g transform="translate(104 92)">
+    <text class="font eyebrow" x="0" y="0">NON-COMMERCIAL · AI AGENT SKILL</text>
+    <text class="font title" x="0" y="132">Lever-GaoKao</text>
+    <text class="font subtitle" x="4" y="196">人生杠杆・高考志愿填报 Agent</text>
+    <text class="font lead" x="4" y="290">把志愿填报从焦虑选择，变成可核验的家庭决策。</text>
+    <text class="font body" x="4" y="350">先问清学生和家庭，再整理学校与专业，</text>
+    <text class="font body" x="4" y="388">最后把依据、风险和待核验事项说清楚。</text>
   </g>
 
-  <g transform="translate(106 520)" filter="url(#softShadow)">
-    <rect width="210" height="72" rx="36" fill="#ffffff" stroke="#99f6e4"/>
-    <text class="font tag" x="50" y="45">多方案</text>
-    <rect x="240" width="210" height="72" rx="36" fill="#ffffff" stroke="#bfdbfe"/>
-    <text class="font tag" x="290" y="45" fill="#1d4ed8">证据链</text>
-    <rect x="480" width="210" height="72" rx="36" fill="#ffffff" stroke="#fde68a"/>
-    <text class="font tag" x="530" y="45" fill="#b45309">风险审计</text>
+  <g transform="translate(108 518)" filter="url(#shadow)">
+    <rect width="196" height="64" rx="32" fill="#ffffff" stroke="#99f6e4"/>
+    <text class="font pill" x="50" y="40">先问清</text>
+    <rect x="226" width="196" height="64" rx="32" fill="#ffffff" stroke="#bfdbfe"/>
+    <text class="font pill" x="276" y="40" fill="#1d4ed8">有依据</text>
+    <rect x="452" width="196" height="64" rx="32" fill="#ffffff" stroke="#fde68a"/>
+    <text class="font pill" x="502" y="40" fill="#b45309">讲风险</text>
   </g>
 
-  <g transform="translate(760 130)">
-    <path d="M88 560 C210 408 334 337 460 216 C548 132 626 82 724 38" fill="none" stroke="url(#rise)" stroke-width="28" stroke-linecap="round"/>
-    <path d="M704 30 l-24 76 l76 -23Z" fill="#f59e0b"/>
-    <path d="M20 632 H800" stroke="#0f172a" stroke-width="4" opacity=".12"/>
+  <g transform="translate(820 130)">
+    <path d="M80 600 C198 452 326 392 462 270 C562 180 642 116 724 70" fill="none" stroke="url(#route)" stroke-width="30" stroke-linecap="round"/>
+    <circle cx="80" cy="600" r="18" fill="#0f766e"/>
+    <circle cx="462" cy="270" r="18" fill="#2563eb"/>
+    <path d="M696 50 l-18 86 l78 -34Z" fill="#f59e0b"/>
+    <path d="M12 674 H770" stroke="#0f172a" stroke-width="4" opacity="0.12"/>
 
-    <g filter="url(#softShadow)">
-      <g transform="translate(0 444)">
-        <rect width="244" height="104" rx="28" fill="#ffffff"/>
-        <text class="font label" x="32" y="46">分数与位次</text>
-        <text class="font small" x="32" y="76">先确定可达边界</text>
+    <g filter="url(#shadow)">
+      <g transform="translate(0 488)">
+        <rect width="272" height="106" rx="28" fill="#ffffff"/>
+        <text class="font cardTitle" x="34" y="48">录取边界</text>
+        <text class="font cardText" x="34" y="78">分数、位次、规则</text>
       </g>
-      <g transform="translate(248 300)">
-        <rect width="256" height="104" rx="28" fill="#ffffff"/>
-        <text class="font label" x="32" y="46">候选池 ledger</text>
-        <text class="font small" x="32" y="76">新增、降级、复入</text>
+      <g transform="translate(258 314)">
+        <rect width="282" height="106" rx="28" fill="#ffffff"/>
+        <text class="font cardTitle" x="34" y="48">可选方向</text>
+        <text class="font cardText" x="34" y="78">学校、城市、专业</text>
       </g>
-      <g transform="translate(464 160)">
-        <rect width="250" height="104" rx="28" fill="#ffffff"/>
-        <text class="font label" x="32" y="46">风险与取舍</text>
-        <text class="font small" x="32" y="76">城市、专业、调剂</text>
+      <g transform="translate(458 150)">
+        <rect width="282" height="106" rx="28" fill="#ffffff"/>
+        <text class="font cardTitle" x="34" y="48">风险取舍</text>
+        <text class="font cardText" x="34" y="78">调剂、成本、退路</text>
       </g>
-      <g transform="translate(590 10)">
-        <rect width="260" height="104" rx="28" fill="#ffffff"/>
-        <text class="font label" x="32" y="46">长期兑现</text>
-        <text class="font small" x="32" y="76">入学后行动计划</text>
+      <g transform="translate(484 0)">
+        <rect width="288" height="106" rx="28" fill="#ffffff"/>
+        <text class="font cardTitle" x="34" y="48">长期机会</text>
+        <text class="font cardText" x="34" y="78">升学、就业、成长</text>
       </g>
     </g>
   </g>
 
-  <g transform="translate(98 760)">
-    <rect width="760" height="72" rx="24" fill="url(#ink)" opacity=".96"/>
-    <text class="font" x="36" y="46" font-size="24" font-weight="760" fill="#ffffff">不是替你拍板，而是看清每个选择的收益、代价和不确定性。</text>
+  <g transform="translate(104 760)">
+    <rect width="760" height="70" rx="24" fill="url(#navy)" opacity="0.96"/>
+    <text class="font" x="36" y="44" font-size="24" font-weight="760" fill="#ffffff">不是替你拍板，而是帮你看清每个选择的得失。</text>
   </g>
 </svg>

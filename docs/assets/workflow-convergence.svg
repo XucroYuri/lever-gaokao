@@ -1,106 +1,99 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-label="Lever-GaoKao Agent 执行闭环：高召回，再收敛">
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-label="Lever-GaoKao 工作流：从大量候选到可填方案">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#f8fbff"/>
-      <stop offset=".55" stop-color="#f7fbf8"/>
+      <stop offset="0.56" stop-color="#f6fbf8"/>
       <stop offset="1" stop-color="#fff8e7"/>
     </linearGradient>
     <linearGradient id="flow" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#14b8a6"/>
-      <stop offset=".55" stop-color="#2563eb"/>
+      <stop offset="0" stop-color="#0f766e"/>
+      <stop offset="0.55" stop-color="#2563eb"/>
       <stop offset="1" stop-color="#f59e0b"/>
     </linearGradient>
-    <filter id="shadow" x="-18%" y="-28%" width="136%" height="160%">
-      <feDropShadow dx="0" dy="18" stdDeviation="24" flood-color="#0f172a" flood-opacity=".12"/>
+    <filter id="shadow" x="-18%" y="-26%" width="136%" height="160%">
+      <feDropShadow dx="0" dy="18" stdDeviation="24" flood-color="#0f172a" flood-opacity="0.12"/>
     </filter>
     <style>
       .font{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Noto Sans CJK SC","Microsoft YaHei",Arial,sans-serif}
-      .kicker{font-size:22px;font-weight:780;letter-spacing:2px;fill:#1d4ed8}
-      .title{font-size:64px;font-weight:860;letter-spacing:-.5px;fill:#0f172a}
+      .kicker{font-size:23px;font-weight:780;letter-spacing:2px;fill:#1d4ed8}
+      .title{font-size:68px;font-weight:860;fill:#0f172a}
       .sub{font-size:26px;font-weight:580;fill:#475569}
-      .step{font-size:25px;font-weight:820;fill:#0f172a}
-      .desc{font-size:19px;font-weight:560;fill:#64748b}
-      .num{font-size:18px;font-weight:850;fill:#ffffff}
-      .ledger{font-size:24px;font-weight:820;fill:#0f172a}
+      .step{font-size:28px;font-weight:840;fill:#0f172a}
+      .desc{font-size:21px;font-weight:600;fill:#64748b}
+      .num{font-size:19px;font-weight:860;fill:#ffffff}
+      .note{font-size:24px;font-weight:800;fill:#0f172a}
     </style>
   </defs>
 
   <rect width="1600" height="900" fill="url(#bg)"/>
-  <path d="M0 680 C210 604 400 768 618 666 C806 580 940 494 1160 560 C1320 608 1450 555 1600 500 L1600 900 L0 900Z" fill="#edf7ff"/>
-  <path d="M0 746 C220 688 356 824 620 744 C838 678 1012 734 1214 654 C1380 590 1496 646 1600 606 L1600 900 L0 900Z" fill="#ecfbf5"/>
+  <path d="M0 682 C210 604 410 764 620 660 C806 568 940 506 1162 560 C1320 598 1450 556 1600 502 L1600 900 L0 900Z" fill="#edf7ff"/>
+  <path d="M0 748 C230 686 360 824 626 746 C838 684 1010 728 1216 650 C1382 588 1496 646 1600 608 L1600 900 L0 900Z" fill="#ecfbf5"/>
 
-  <g transform="translate(90 76)">
-    <text class="font kicker" x="0" y="0">AGENT OPERATING SYSTEM</text>
-    <text class="font title" x="0" y="86">高召回，再收敛</text>
-    <text class="font sub" x="2" y="128">面对几千个院校/专业候选，Agent 不凭记忆推荐，而是维护候选池、证据和风险 ledger。</text>
+  <g transform="translate(92 76)">
+    <text class="font kicker" x="0" y="0">HOW IT WORKS</text>
+    <text class="font title" x="0" y="90">从大量候选，到能解释的方案</text>
+    <text class="font sub" x="2" y="134">Agent 不凭印象拍脑袋；每一步都留下来源、理由、风险和待核验事项。</text>
   </g>
 
-  <g transform="translate(116 238)">
-    <path d="M80 140 C245 38 455 42 606 143 C762 248 943 254 1102 151 C1225 72 1340 72 1440 128" fill="none" stroke="url(#flow)" stroke-width="24" stroke-linecap="round"/>
-    <path d="M1428 99 l62 36 l-67 25Z" fill="#f59e0b"/>
+  <g transform="translate(116 270)">
+    <path d="M88 120 H1340" fill="none" stroke="url(#flow)" stroke-width="18" stroke-linecap="round"/>
+    <path d="M1320 88 l70 32 l-70 32Z" fill="#f59e0b"/>
 
     <g filter="url(#shadow)">
-      <g transform="translate(0 80)">
-        <circle cx="80" cy="60" r="58" fill="#0f766e"/>
-        <text class="font num" x="68" y="67">01</text>
-        <rect x="-18" y="128" width="220" height="86" rx="20" fill="#ffffff" opacity=".88"/>
-        <text class="font step" x="0" y="156">引导问诊</text>
-        <text class="font desc" x="0" y="188">硬信息、学生意愿</text>
+      <g transform="translate(0 0)">
+        <circle cx="88" cy="120" r="58" fill="#0f766e"/>
+        <text class="font num" x="76" y="127">01</text>
+        <rect x="-10" y="198" width="236" height="108" rx="24" fill="#ffffff"/>
+        <text class="font step" x="22" y="246">问清资料</text>
+        <text class="font desc" x="22" y="280">省份、位次、约束</text>
       </g>
-      <g transform="translate(238 0)">
-        <circle cx="80" cy="60" r="58" fill="#2563eb"/>
-        <text class="font num" x="68" y="67">02</text>
-        <rect x="-18" y="128" width="220" height="86" rx="20" fill="#ffffff" opacity=".88"/>
-        <text class="font step" x="0" y="156">规则核验</text>
-        <text class="font desc" x="0" y="188">规则、计划、位次</text>
+      <g transform="translate(254 0)">
+        <circle cx="88" cy="120" r="58" fill="#2563eb"/>
+        <text class="font num" x="76" y="127">02</text>
+        <rect x="-10" y="198" width="236" height="108" rx="24" fill="#ffffff"/>
+        <text class="font step" x="22" y="246">查清规则</text>
+        <text class="font desc" x="22" y="280">计划、章程、专业组</text>
       </g>
-      <g transform="translate(476 84)">
-        <circle cx="80" cy="60" r="58" fill="#6d28d9"/>
-        <text class="font num" x="68" y="67">03</text>
-        <rect x="-18" y="128" width="220" height="86" rx="20" fill="#ffffff" opacity=".88"/>
-        <text class="font step" x="0" y="156">画像路由</text>
-        <text class="font desc" x="0" y="188">空间、能力、路径</text>
+      <g transform="translate(508 0)">
+        <circle cx="88" cy="120" r="58" fill="#6d28d9"/>
+        <text class="font num" x="76" y="127">03</text>
+        <rect x="-10" y="198" width="236" height="108" rx="24" fill="#ffffff"/>
+        <text class="font step" x="22" y="246">尽量找全</text>
+        <text class="font desc" x="22" y="280">省内、省外、特殊机会</text>
       </g>
-      <g transform="translate(714 108)">
-        <circle cx="80" cy="60" r="58" fill="#0f9f9a"/>
-        <text class="font num" x="68" y="67">04</text>
-        <rect x="-18" y="128" width="220" height="86" rx="20" fill="#ffffff" opacity=".88"/>
-        <text class="font step" x="0" y="156">机会雷达</text>
-        <text class="font desc" x="0" y="188">行业、地域、平台</text>
+      <g transform="translate(762 0)">
+        <circle cx="88" cy="120" r="58" fill="#0f9f9a"/>
+        <text class="font num" x="76" y="127">04</text>
+        <rect x="-10" y="198" width="236" height="108" rx="24" fill="#ffffff"/>
+        <text class="font step" x="22" y="246">逐步排除</text>
+        <text class="font desc" x="22" y="280">不合规、不适配</text>
       </g>
-      <g transform="translate(952 26)">
-        <circle cx="80" cy="60" r="58" fill="#f59e0b"/>
-        <text class="font num" x="68" y="67">05</text>
-        <rect x="-18" y="128" width="220" height="86" rx="20" fill="#ffffff" opacity=".9"/>
-        <text class="font step" x="0" y="156">风险审计</text>
-        <text class="font desc" x="0" y="188">调剂、成本、质量</text>
-      </g>
-      <g transform="translate(1220 58)">
-        <circle cx="80" cy="60" r="58" fill="#0f172a"/>
-        <text class="font num" x="68" y="67">06</text>
-        <rect x="-18" y="128" width="220" height="86" rx="20" fill="#ffffff" opacity=".9"/>
-        <text class="font step" x="0" y="156">方案输出</text>
-        <text class="font desc" x="0" y="188">报告、表格、排序</text>
+      <g transform="translate(1016 0)">
+        <circle cx="88" cy="120" r="58" fill="#f59e0b"/>
+        <text class="font num" x="76" y="127">05</text>
+        <rect x="-10" y="198" width="236" height="108" rx="24" fill="#ffffff"/>
+        <text class="font step" x="22" y="246">输出方案</text>
+        <text class="font desc" x="22" y="280">报告、表格、排序</text>
       </g>
     </g>
   </g>
 
-  <g transform="translate(142 620)" filter="url(#shadow)">
-    <rect width="1316" height="158" rx="34" fill="#ffffff"/>
-    <text class="font ledger" x="42" y="52">候选池 ledger：每一次新增、剔除、降级和复入都必须留痕</text>
-    <g transform="translate(42 88)">
-      <rect width="248" height="48" rx="24" fill="#ecfeff"/>
-      <text class="font desc" x="34" y="31" fill="#0f766e" font-weight="820">候选池：高召回</text>
-      <rect x="300" width="260" height="48" rx="24" fill="#eff6ff"/>
-      <text class="font desc" x="334" y="31" fill="#1d4ed8" font-weight="820">剔除/降级：有原因</text>
-      <rect x="612" width="248" height="48" rx="24" fill="#f5f3ff"/>
-      <text class="font desc" x="646" y="31" fill="#6d28d9" font-weight="820">待核验：不硬推</text>
-      <rect x="912" width="290" height="48" rx="24" fill="#fffbeb"/>
-      <text class="font desc" x="946" y="31" fill="#b45309" font-weight="820">最终组合：可解释排序</text>
+  <g transform="translate(146 640)" filter="url(#shadow)">
+    <rect width="1308" height="140" rx="34" fill="#ffffff"/>
+    <text class="font note" x="44" y="52">变更记录：每个选择为什么进来、为什么排除、什么情况下可以复入</text>
+    <g transform="translate(44 86)">
+      <rect width="245" height="44" rx="22" fill="#ecfeff"/>
+      <text class="font desc" x="34" y="29" fill="#0f766e" font-weight="820">候选清单</text>
+      <rect x="296" width="245" height="44" rx="22" fill="#eff6ff"/>
+      <text class="font desc" x="330" y="29" fill="#1d4ed8" font-weight="820">排除理由</text>
+      <rect x="592" width="245" height="44" rx="22" fill="#f5f3ff"/>
+      <text class="font desc" x="626" y="29" fill="#6d28d9" font-weight="820">待核验事项</text>
+      <rect x="888" width="280" height="44" rx="22" fill="#fffbeb"/>
+      <text class="font desc" x="922" y="29" fill="#b45309" font-weight="820">最终组合说明</text>
     </g>
   </g>
 
-  <g transform="translate(244 822)">
-    <text class="font" x="0" y="0" font-size="24" font-weight="760" fill="#334155">原则：先扩大视野，再用规则、位次、质量、调剂和学生执行力逐层收敛。</text>
+  <g transform="translate(252 822)">
+    <text class="font" x="0" y="0" font-size="24" font-weight="760" fill="#334155">目标不是给一个神秘答案，而是让每个推荐都说得清、查得到、能复核。</text>
   </g>
 </svg>
