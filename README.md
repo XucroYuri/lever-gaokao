@@ -1,4 +1,4 @@
-# Lever-GaoKao
+# Lever-GaoKao - 高考志愿填报智能体
 
 <p align="center">
   <em>Life Leverage for College Admission</em><br>
