@@ -116,6 +116,12 @@ python3 lever-gaokao/scripts/ledger_tool.py validate-candidate-table candidates.
 - 不要让商业志愿填报机构把本项目包装成付费服务。
 - 不要把“升格、合并、更名、捡漏、热门 AI 专业”当作确定收益。
 
+## 后续规划
+
+我正在继续探索：如何把这套志愿填报参考机制和 AI Agent 能力，更低门槛地提供给普通家庭、偏远地区、以及来自高考录取竞争烈度较高省份的学生和家长。
+
+如果你有更好的公益合作、数据建设、工具落地或使用传播建议，欢迎联系我。
+
 ## 支持项目
 
 <!-- SUPPORT-PROJECT:START -->
@@ -139,7 +145,6 @@ python3 lever-gaokao/scripts/ledger_tool.py validate-candidate-table candidates.
 
 特别声明：
 - 基于公益性目的，本项目禁止用于：商业志愿填报咨询机构、教育咨询公司、SaaS 平台、付费知识产品、内部商业工具和其他营利性服务，不得基于本项目进行二次开发、集成、训练、包装或付费交付，除非获得项目维护者的单独书面授权。详见 [LICENSE](LICENSE)、[NONCOMMERCIAL.md](NONCOMMERCIAL.md) 和 [DISCLAIMER.md](DISCLAIMER.md)。
-- 我还在考虑如何将这样的志愿填报的参考机制和AI Agent能力更多的提供给家境普通、偏远地区、高考录取高竞争烈度省份的学生和家长，如果你有更好的建议，欢迎联系我。
 
 ## 贡献
 
