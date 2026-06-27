@@ -60,7 +60,7 @@ python3 scripts/ledger_tool.py coverage-audit candidates.csv --home-province 四
 | source_type | 当年官方、近年官方、商业 API、开放研究数据、辅助数据、口碑线索、用户提供 |
 | source_ref | 文件名、链接、页码或截图编号 |
 | source_status | 已核验、待交叉验证、待核验假设 |
-| discovery_method | 官方计划导入、规则过滤、机会雷达、子代理发现、用户提供 |
+| discovery_method | 官方计划导入、硬规则过滤后保留、机会雷达扩展、用户意向、子代理发现、漏选审计补充、宏观变量扫描补充 |
 | tags | 画像、杠杆、宏观、风险标签 |
 | current_status | 候选、观察、降级、剔除、待核验、最终组合 |
 | downgrade_reason | 降级或剔除原因 |

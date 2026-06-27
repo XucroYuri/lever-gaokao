@@ -21,11 +21,12 @@
     <path d="M210 0 L420 560 M640 0 L560 560 M1060 0 L895 560 M1320 0 L1240 560" fill="none"/>
   </g>
   <g transform="translate(96 86)">
-    <text x="0" y="0" font-family="PingFang SC, Hiragino Sans GB, Noto Sans CJK SC, Arial, sans-serif" font-size="38" fill="#2f4f4f" font-weight="700">人生志愿杠杆</text>
+    <text x="0" y="0" font-family="Inter, Arial, sans-serif" font-size="42" fill="#2f4f4f" font-weight="800">Lever-GaoKao</text>
     <text x="0" y="56" font-family="Inter, Arial, sans-serif" font-size="25" fill="#4b5563">Life Leverage for College Admission</text>
-    <text x="0" y="132" font-family="PingFang SC, Hiragino Sans GB, Noto Sans CJK SC, Arial, sans-serif" font-size="68" fill="#1f2937" font-weight="800">把高考志愿填报</text>
-    <text x="0" y="214" font-family="PingFang SC, Hiragino Sans GB, Noto Sans CJK SC, Arial, sans-serif" font-size="68" fill="#1f2937" font-weight="800">做成可核验的决策地图</text>
-    <text x="0" y="286" font-family="PingFang SC, Hiragino Sans GB, Noto Sans CJK SC, Arial, sans-serif" font-size="29" fill="#475569">非商用 AI Agent Skill · 规则核验 · 候选池收敛 · 长期人生杠杆</text>
+    <text x="0" y="98" font-family="PingFang SC, Hiragino Sans GB, Noto Sans CJK SC, Arial, sans-serif" font-size="30" fill="#2f4f4f" font-weight="700">人生杠杆・高考志愿填报 Agent</text>
+    <text x="0" y="176" font-family="PingFang SC, Hiragino Sans GB, Noto Sans CJK SC, Arial, sans-serif" font-size="68" fill="#1f2937" font-weight="800">把高考志愿填报</text>
+    <text x="0" y="258" font-family="PingFang SC, Hiragino Sans GB, Noto Sans CJK SC, Arial, sans-serif" font-size="68" fill="#1f2937" font-weight="800">做成可核验的决策地图</text>
+    <text x="0" y="330" font-family="PingFang SC, Hiragino Sans GB, Noto Sans CJK SC, Arial, sans-serif" font-size="28" fill="#475569">非商用 AI Agent Skill · 规则核验 · 候选池收敛 · 风险审计</text>
   </g>
   <g transform="translate(965 86)" filter="url(#soft)">
     <rect x="0" y="0" width="510" height="365" rx="28" fill="#ffffff" opacity="0.86"/>

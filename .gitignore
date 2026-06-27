@@ -1,18 +1,88 @@
-# Python
+# OS caches
+.DS_Store
+Thumbs.db
+
+# Editors and local IDE state
+.vscode/
+.idea/
+*.swp
+*.swo
+*.code-workspace
+
+# Python and test caches
 __pycache__/
 *.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+dist/
+build/
+*.egg-info/
 
-# Local generated data
+# Local environments and secrets
+.env
+.env.*
+!.env.example
+.venv/
+venv/
+env/
+
+# Agent and local tool state
+.codex/
+.claude/
+.cursor/
+.continue/
+.windsurf/
+.aider*
+.cline/
+.roo/
+
+# Temporary files and generated outputs
 *.tmp
 *.temp
 *.bak
 *.log
+tmp/
+temp/
+.tmp/
+outputs/
+reports/
+exports/
+artifacts/
+screenshots/
+ocr/
+
+# Candidate tables, ledgers, audit reports and private student data
 *.csv
 *.json
+candidates/
+candidate-tables/
+ledgers/
+student-data/
+private/
+考生资料/
+志愿表/
+候选池/
+*candidate*.csv
+*candidate*.json
+*ledger*.csv
+*ledger*.json
+*audit*.json
+*report*.json
+*考生*.csv
+*考生*.json
+*志愿*.csv
+*志愿*.json
+*候选*.csv
+*候选*.json
+
+# Source configuration exceptions
 !package.json
-
-# OS/editor
-.DS_Store
-.vscode/
-.idea/
-
+!package-lock.json
+!pnpm-lock.yaml
+!yarn.lock
+!tsconfig.json
+!*.schema.json
+!.github/**/*.json

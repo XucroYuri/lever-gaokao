@@ -1,0 +1,7 @@
+interface:
+  display_name: "Lever-GaoKao"
+  short_description: "高考志愿画像、候选池收敛、风险审计与长期规划"
+  default_prompt: "使用 $lever-gaokao 为中国高考考生生成证据驱动、风险可控、兼顾长期人生杠杆的志愿填报建议。"
+
+policy:
+  allow_implicit_invocation: true

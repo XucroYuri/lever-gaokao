@@ -3,7 +3,7 @@
 About:
 
 ```text
-Non-commercial AI Agent Skill for evidence-driven Chinese Gaokao college admission planning.
+Lever-GaoKao: AI agent for Gaokao college volunteer planning, based on life leverage philosophy
 ```
 
 Topics:
@@ -14,6 +14,8 @@ college-admission
 china-education
 ai-agent
 agent-skill
+life-leverage
+volunteer-planning
 codex
 claude-code
 cursor
@@ -28,4 +30,3 @@ public-interest
 ```
 
 远端仓库创建后，再根据实际 `owner/repo` 设置 About、topics、homepage 和 visibility。没有远端前不要执行 GitHub 侧修改。
-

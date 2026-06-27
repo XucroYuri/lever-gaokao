@@ -29,9 +29,9 @@
 
 ## PR 前检查
 
-- `PYTHONDONTWRITEBYTECODE=1 python3 -B life-leverage-college-admission/scripts/ledger_tool.py selftest`
+- `PYTHONDONTWRITEBYTECODE=1 python3 -B lever-gaokao/scripts/ledger_tool.py selftest`
 - Ruby YAML/frontmatter 解析或等效校验。
-- 无占位符、模板残留或长英文通用 prompt。
+- 无占位符、模板残留或冗长通用提示词。
 - 无 `__pycache__`、`.pyc`、临时 CSV 或学生隐私文件。
 - README 中新增链接均能指向存在文件。
 
