@@ -13,7 +13,7 @@
 </p>
 
 <p align="center">
-  <img src="docs/assets/cover.png" alt="Lever-GaoKao 封面：人生杠杆・高考志愿填报 Agent" width="100%">
+  <img src="docs/assets/imagegen/cover.png" alt="Lever-GaoKao 封面：人生杠杆・高考志愿填报 Agent" width="100%">
 </p>
 
 `Lever-GaoKao` 是一个非商用的高考志愿填报辅助项目。它做三件事：先问清孩子和家庭的真实情况，再整理可选学校和专业，最后把每个选择的好处、风险和还要核验的资料说清楚。
@@ -77,7 +77,7 @@ python3 lever-gaokao/scripts/ledger_tool.py validate-candidate-table candidates.
 ## 选择哲学
 
 <p align="center">
-  <img src="docs/assets/decision-framework.png" alt="选择框架：不是学校好坏题，而是路径取舍题" width="100%">
+  <img src="docs/assets/imagegen/decision-framework.png" alt="选择框架：不是学校好坏题，而是路径取舍题" width="100%">
 </p>
 
 志愿填报不是只追热门，也不是赌运气。更重要的是：这个选择能不能录上、能不能接受，四年后有没有继续升学、就业转向或平台跃迁的空间。
@@ -85,7 +85,7 @@ python3 lever-gaokao/scripts/ledger_tool.py validate-candidate-table candidates.
 ## 它怎么工作
 
 <p align="center">
-  <img src="docs/assets/workflow-convergence.png" alt="工作方式：从大量候选，到能解释的方案" width="100%">
+  <img src="docs/assets/imagegen/workflow-convergence.png" alt="工作方式：从大量候选，到能解释的方案" width="100%">
 </p>
 
 完整分析会先问清情况，再查规则和资料，然后整理候选学校，逐步排除不合适的选择，最后给出报告、表格和入学后的行动建议。简单问题会只走必要步骤。
