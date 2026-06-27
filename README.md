@@ -116,6 +116,23 @@ python3 lever-gaokao/scripts/ledger_tool.py validate-candidate-table candidates.
 - 不要让商业志愿填报机构把本项目包装成付费服务。
 - 不要把“升格、合并、更名、捡漏、热门 AI 专业”当作确定收益。
 
+## 支持项目
+
+如果这个项目对你有帮助，可以自愿赞赏支持后续维护。赞赏不是付费咨询服务，也不构成任何录取结果或填报结果承诺；请不要在转账备注中填写考生姓名、准考证号、手机号等敏感信息。
+
+<table>
+  <tr>
+    <td align="center">
+      <strong>支付宝</strong><br>
+      <img src="docs/assets/sponsor/alipay.png" alt="支付宝公开赞助收款码" width="240">
+    </td>
+    <td align="center">
+      <strong>微信赞赏</strong><br>
+      <img src="docs/assets/sponsor/wechat-reward.png" alt="微信公开赞赏码" width="240">
+    </td>
+  </tr>
+</table>
+
 ## 源码开放但非商用
 
 本项目是公益导向的“源码开放、非商用”项目，不是 OSI 定义下的无限制开源项目。
