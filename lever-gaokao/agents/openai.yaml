@@ -1,7 +1,7 @@
 interface:
   display_name: "Lever-GaoKao"
-  short_description: "高考志愿人生杠杆、低估机会与过热风险审计"
-  default_prompt: "使用 $lever-gaokao 为中国高考考生生成证据驱动、风险可控、兼顾人生杠杆率、低估机会和过热风险审计的志愿填报建议。"
+  short_description: "高考志愿人生杠杆、第一性原理、对抗式审查与风险审计"
+  default_prompt: "使用 $lever-gaokao 为中国高考考生生成证据驱动、风险可控、兼顾人生杠杆率、第一性原理审查、低估机会和对抗式风险审计的志愿填报建议。"
 
 policy:
   allow_implicit_invocation: true

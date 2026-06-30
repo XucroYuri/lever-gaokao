@@ -140,6 +140,16 @@ def write_report(path: str | None, report: dict[str, Any]) -> None:
         handle.write("\n")
 
 
+def ratio_0_to_1(value: str) -> float:
+    try:
+        ratio = float(value)
+    except ValueError as exc:
+        raise argparse.ArgumentTypeError("比例必须是 0 到 1 之间的数字") from exc
+    if ratio < 0 or ratio > 1:
+        raise argparse.ArgumentTypeError("比例必须在 0 到 1 之间")
+    return ratio
+
+
 def validate_rows(rows: list[dict[str, str]], fields: list[str]) -> tuple[list[str], list[str], dict[str, Any]]:
     errors: list[str] = []
     warnings: list[str] = []
@@ -440,6 +450,13 @@ def joined_row_text(row: dict[str, str]) -> str:
     return " ".join(row.get(field, "") for field in ["institution", "authority", "school_nature", "tags", "major", "major_group", "city"])
 
 
+def row_matches_region(row: dict[str, str], keywords: list[str]) -> bool:
+    if not keywords:
+        return False
+    text = " ".join(row.get(field, "") for field in ["province", "city", "campus"])
+    return any(keyword and keyword in text for keyword in keywords)
+
+
 def command_coverage(args: argparse.Namespace) -> int:
     errors: list[str] = []
     warnings: list[str] = []
@@ -457,9 +474,21 @@ def command_coverage(args: argparse.Namespace) -> int:
         if args.home_province and rows:
             home_count = sum(1 for row in rows if row.get("province") == args.home_province)
             if home_count == len(rows):
-                warnings.append("候选池全部来自本省，可能遗漏省外低估机会")
+                warnings.append("候选池全部来自本省，可能遗漏本省外或非同源低估机会")
         elif len(provinces) <= 1 and rows:
-            warnings.append("候选池省份过于集中，建议检查省外候选覆盖")
+            warnings.append("候选池省份过于集中，建议检查本省外或非同源候选覆盖")
+
+        home_region_keywords = getattr(args, "home_region_keyword", []) or []
+        min_outside_ratio = getattr(args, "min_outside_home_region_ratio", 0.25)
+        home_region_match_count = 0
+        outside_home_region_ratio: float | None = None
+        if home_region_keywords and rows:
+            home_region_match_count = sum(1 for row in rows if row_matches_region(row, home_region_keywords))
+            outside_home_region_ratio = (len(rows) - home_region_match_count) / len(rows)
+            if outside_home_region_ratio < min_outside_ratio:
+                warnings.append(
+                    "候选池过度集中于本省/本区域，可能遗漏区域外低估机会、升学跳板或真保底对照组"
+                )
 
         for city in args.popular_city or []:
             if rows and sum(1 for row in rows if city in row.get("city", "")) / len(rows) >= 0.7:
@@ -480,7 +509,14 @@ def command_coverage(args: argparse.Namespace) -> int:
             top_major, top_count = Counter(major_roots).most_common(1)[0]
             if top_count / len(major_roots) >= 0.7:
                 warnings.append(f"候选专业方向过于集中，可能过拟合单一方向: {top_major}")
-        details = {"row_count": len(rows), "province_counts": dict(provinces), "city_counts": dict(cities)}
+        details = {
+            "row_count": len(rows),
+            "province_counts": dict(provinces),
+            "city_counts": dict(cities),
+            "home_region_keywords": home_region_keywords,
+            "home_region_match_count": home_region_match_count,
+            "outside_home_region_ratio": outside_home_region_ratio,
+        }
     except ToolError as exc:
         errors.append(str(exc))
 
@@ -499,7 +535,7 @@ def command_coverage(args: argparse.Namespace) -> int:
 
 def sample_selftest_rows() -> list[dict[str, str]]:
     base = {
-        "province": "四川",
+        "province": "样例本省",
         "year": "2026",
         "batch": "本科批",
         "category": "普通类",
@@ -554,7 +590,7 @@ def sample_selftest_rows() -> list[dict[str, str]]:
             **base,
             "candidate_id": "C003",
             "institution": "样例待核验大学",
-            "city": "成都",
+            "city": "样例城市C",
             "school_nature": "公办",
             "authority": "行业特色",
             "volunteer_unit": "样例待核验大学-02",
@@ -605,6 +641,11 @@ def command_selftest(args: argparse.Namespace) -> int:
         filtered_path = root / "filtered.csv"
         merged_path = root / "merged.csv"
         final_path = root / "final.csv"
+        coverage_region_report = root / "coverage-region.json"
+        coverage_diverse_path = root / "coverage-diverse.csv"
+        coverage_diverse_report = root / "coverage-diverse.json"
+        coverage_tag_false_positive_path = root / "coverage-tag-false-positive.csv"
+        coverage_tag_false_positive_report = root / "coverage-tag-false-positive.json"
 
         rows = sample_selftest_rows()
         write_csv(str(candidates_path), rows, FIELD_ORDER)
@@ -615,6 +656,32 @@ def command_selftest(args: argparse.Namespace) -> int:
             rows[2],
         ]
         write_csv(str(final_path), final_rows, FIELD_ORDER)
+        diverse_rows = rows + [
+            {
+                **rows[0],
+                "candidate_id": "C004",
+                "province": "样例外省",
+                "institution": "样例异地大学",
+                "city": "样例外省城市",
+                "volunteer_unit": "样例异地大学-01",
+                "major": "汉语言文学",
+                "tags": "非同源对照 学风升学",
+            }
+        ]
+        write_csv(str(coverage_diverse_path), diverse_rows, FIELD_ORDER)
+        tag_false_positive_rows = rows + [
+            {
+                **rows[0],
+                "candidate_id": "C005",
+                "province": "样例外省",
+                "institution": "样例异地大学",
+                "city": "样例外省城市B",
+                "volunteer_unit": "样例异地大学-01",
+                "major": "数据科学与大数据技术",
+                "tags": "样例本省生源友好 非同源对照",
+            }
+        ]
+        write_csv(str(coverage_tag_false_positive_path), tag_false_positive_rows, FIELD_ORDER)
 
         checks = [
             (
@@ -666,7 +733,7 @@ def command_selftest(args: argparse.Namespace) -> int:
             (
                 "coverage audit warnings only",
                 command_coverage,
-                argparse.Namespace(csv_path=str(candidates_path), home_province="四川", popular_city=["成都"], report=None),
+                argparse.Namespace(csv_path=str(candidates_path), home_province="样例本省", popular_city=["样例城市C"], report=None),
                 0,
             ),
         ]
@@ -698,6 +765,118 @@ def command_selftest(args: argparse.Namespace) -> int:
                 errors.append(f"merge-ledgers 合并后候选数量异常: {len(merged_rows)}")
         else:
             errors.append("merge-ledgers 未写出合并结果")
+
+        region_args = [
+            "coverage-audit",
+            str(candidates_path),
+            "--home-region-keyword",
+            "样例本省",
+            "--home-region-keyword",
+            "样例邻区",
+            "--min-outside-home-region-ratio",
+            "0.25",
+            "--report",
+            str(coverage_region_report),
+        ]
+        region_buffer = io.StringIO()
+        region_error_buffer = io.StringIO()
+        with contextlib.redirect_stdout(region_buffer), contextlib.redirect_stderr(region_error_buffer):
+            try:
+                region_code = main(region_args)
+            except SystemExit as exc:
+                region_code = int(exc.code or 0)
+        steps.append({"label": "coverage CLI home region warning", "expected_code": 0, "actual_code": region_code})
+        if region_code != 0:
+            errors.append("coverage-audit 新增地域参数返回码异常: " + region_error_buffer.getvalue().strip())
+        elif coverage_region_report.exists():
+            region_report = json.loads(coverage_region_report.read_text(encoding="utf-8"))
+            region_warnings = "\n".join(region_report.get("warnings", []))
+            if "本省/本区域" not in region_warnings:
+                errors.append("coverage-audit 未提示本省/本区域候选过度集中")
+            if "outside_home_region_ratio" not in region_report.get("details", {}):
+                errors.append("coverage-audit 报告缺少 outside_home_region_ratio")
+        else:
+            errors.append("coverage-audit 未写出本区域覆盖报告")
+
+        diverse_args = [
+            "coverage-audit",
+            str(coverage_diverse_path),
+            "--home-region-keyword",
+            "样例本省",
+            "--home-region-keyword",
+            "样例邻区",
+            "--min-outside-home-region-ratio",
+            "0.25",
+            "--report",
+            str(coverage_diverse_report),
+        ]
+        diverse_buffer = io.StringIO()
+        diverse_error_buffer = io.StringIO()
+        with contextlib.redirect_stdout(diverse_buffer), contextlib.redirect_stderr(diverse_error_buffer):
+            try:
+                diverse_code = main(diverse_args)
+            except SystemExit as exc:
+                diverse_code = int(exc.code or 0)
+        steps.append({"label": "coverage CLI home region passes with outside candidate", "expected_code": 0, "actual_code": diverse_code})
+        if diverse_code != 0:
+            errors.append("coverage-audit 非同源对照样例返回码异常: " + diverse_error_buffer.getvalue().strip())
+        elif coverage_diverse_report.exists():
+            diverse_report = json.loads(coverage_diverse_report.read_text(encoding="utf-8"))
+            diverse_warnings = "\n".join(diverse_report.get("warnings", []))
+            if "本省/本区域" in diverse_warnings:
+                errors.append("coverage-audit 在非同源候选达到阈值时仍提示本省/本区域集中")
+        else:
+            errors.append("coverage-audit 未写出非同源对照覆盖报告")
+
+        invalid_ratio_args = [
+            "coverage-audit",
+            str(candidates_path),
+            "--min-outside-home-region-ratio",
+            "1.5",
+        ]
+        invalid_ratio_buffer = io.StringIO()
+        invalid_ratio_error_buffer = io.StringIO()
+        with contextlib.redirect_stdout(invalid_ratio_buffer), contextlib.redirect_stderr(invalid_ratio_error_buffer):
+            try:
+                invalid_ratio_code = main(invalid_ratio_args)
+            except SystemExit as exc:
+                invalid_ratio_code = int(exc.code or 0)
+        steps.append({"label": "coverage CLI rejects invalid outside ratio", "expected_code": 2, "actual_code": invalid_ratio_code})
+        if invalid_ratio_code != 2:
+            errors.append("coverage-audit 未拒绝超出 0 到 1 范围的本区域外比例参数")
+
+        tag_false_positive_args = [
+            "coverage-audit",
+            str(coverage_tag_false_positive_path),
+            "--home-region-keyword",
+            "样例本省",
+            "--min-outside-home-region-ratio",
+            "0.25",
+            "--report",
+            str(coverage_tag_false_positive_report),
+        ]
+        tag_false_positive_buffer = io.StringIO()
+        tag_false_positive_error_buffer = io.StringIO()
+        with contextlib.redirect_stdout(tag_false_positive_buffer), contextlib.redirect_stderr(tag_false_positive_error_buffer):
+            try:
+                tag_false_positive_code = main(tag_false_positive_args)
+            except SystemExit as exc:
+                tag_false_positive_code = int(exc.code or 0)
+        steps.append(
+            {"label": "coverage CLI ignores narrative fields for home-region ratio", "expected_code": 0, "actual_code": tag_false_positive_code}
+        )
+        if tag_false_positive_code != 0:
+            errors.append("coverage-audit 叙事字段误匹配样例返回码异常: " + tag_false_positive_error_buffer.getvalue().strip())
+        elif coverage_tag_false_positive_report.exists():
+            tag_false_positive_report = json.loads(coverage_tag_false_positive_report.read_text(encoding="utf-8"))
+            tag_false_positive_warnings = "\n".join(tag_false_positive_report.get("warnings", []))
+            tag_false_positive_details = tag_false_positive_report.get("details", {})
+            if "本省/本区域" in tag_false_positive_warnings:
+                errors.append("coverage-audit 将 tags 中的地域叙事误算为本省/本区域候选")
+            if tag_false_positive_details.get("outside_home_region_ratio") != 0.25:
+                errors.append("coverage-audit tags 误匹配样例的区域外比例异常")
+        else:
+            errors.append("coverage-audit 未写出叙事字段误匹配覆盖报告")
 
     report = {
         "command": "selftest",
@@ -754,8 +933,15 @@ def build_parser() -> argparse.ArgumentParser:
 
     coverage = subparsers.add_parser("coverage-audit", help="提示候选池覆盖缺口和过拟合风险")
     coverage.add_argument("csv_path")
-    coverage.add_argument("--home-province", help="考生所在省份，用于检查省外覆盖")
+    coverage.add_argument("--home-province", help="考生所在省份，用于检查本省外或非同源覆盖")
     coverage.add_argument("--popular-city", action="append", default=[], help="热门城市关键词，可重复")
+    coverage.add_argument("--home-region-keyword", action="append", default=[], help="本省、本区域或城市群关键词，可重复")
+    coverage.add_argument(
+        "--min-outside-home-region-ratio",
+        type=ratio_0_to_1,
+        default=0.25,
+        help="候选池中本省/本区域外候选的最低比例，默认 0.25",
+    )
     coverage.add_argument("--report", help="写出 JSON 审计报告")
     coverage.set_defaults(func=command_coverage)
     return parser

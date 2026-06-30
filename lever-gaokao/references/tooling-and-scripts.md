@@ -22,7 +22,7 @@ python3 scripts/ledger_tool.py validate-candidate-table candidates.csv --report 
 python3 scripts/ledger_tool.py filter-candidates candidates.csv --subject-type 物化政 --batch 本科批 --max-tuition 8000 --output filtered.csv --report filter.json
 python3 scripts/ledger_tool.py merge-ledgers candidates.csv filtered.csv --output merged.csv --report merge.json
 python3 scripts/ledger_tool.py audit-final-table final.csv --report final-audit.json
-python3 scripts/ledger_tool.py coverage-audit candidates.csv --home-province 四川 --popular-city 成都 --report coverage.json
+python3 scripts/ledger_tool.py coverage-audit candidates.csv --home-province 样例本省 --popular-city 样例热门城市 --home-region-keyword 样例本省 --home-region-keyword 样例区域 --report coverage.json
 ```
 
 默认输出中文审计摘要到 stdout；`--report` 写出 JSON 审计报告；需要生成 CSV 的命令使用 `--output`。
@@ -133,12 +133,28 @@ PYTHONDONTWRITEBYTECODE=1 python3 scripts/ledger_tool.py selftest
 
 - 省份过度集中。
 - 热门城市过度集中。
+- 本省、本区域、熟悉城市群或家庭照护半径过度集中。
 - 高平台、行业特色、特殊身份候选不足。
 - 宏观变量标签不足。
 - 优质高职/职业本科扩展画像缺失。
 - 专业方向过度集中。
 
 覆盖提示只作为补充搜索方向，不直接进入最终志愿表。
+
+新增地域惯性参数：
+
+```bash
+python3 scripts/ledger_tool.py coverage-audit candidates.csv \
+  --home-region-keyword 样例本省 \
+  --home-region-keyword 样例区域 \
+  --min-outside-home-region-ratio 0.25 \
+  --report coverage.json
+```
+
+- `--home-region-keyword` 可重复，用任意省份、区域、城市群或家庭熟悉范围关键词定义需要审计的地域惯性，不内置任何固定地区规则。
+- 地域惯性比例只匹配 `province`、`city`、`campus` 等显式地理字段；`institution`、`authority`、`tags` 里的叙事关键词不计入本区域匹配。
+- `--min-outside-home-region-ratio` 默认 `0.25`，取值范围为 `0` 到 `1`；当本区域外候选比例低于阈值时输出 warning。
+- JSON report 的 `details` 会包含 `home_region_keywords`、`home_region_match_count` 和 `outside_home_region_ratio`。
 
 ## 表格状态约定
 
