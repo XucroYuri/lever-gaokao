@@ -86,3 +86,10 @@ private/
 !tsconfig.json
 !*.schema.json
 !.github/**/*.json
+
+# AI agent config
+.claude/
+!.claude/settings.json
+.omc/
+!.omc/skills/
+!.omc/skills/*.md
