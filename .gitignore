@@ -54,6 +54,11 @@ artifacts/
 screenshots/
 ocr/
 
+# Data layer (raw downloads, DuckDB files, validation reports)
+data/
+*.duckdb
+*.duckdb.wal
+
 # Candidate tables, ledgers, audit reports and private student data
 *.csv
 *.json
