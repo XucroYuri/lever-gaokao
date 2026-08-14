@@ -7,6 +7,27 @@ AI 志愿填报辅助。
 
 本指南覆盖从零开始到完成一次志愿分析的完整流程。
 
+> **两种使用方式**：
+> - **方式 A（推荐）直接下载客户端**：从 [GitHub Releases](https://github.com/XucroYuri/lever-gaokao/releases) 下载对应系统的安装包，双击安装即用（无需装 Node、无需命令行）——见"步骤 0"。
+> - **方式 B（进阶）DIY 部署**：从源码用 Node + dsh 自行搭建，适合开发者或想自定义的人——见"步骤 1"起。
+
+---
+
+## 步骤 0：直接下载客户端（推荐，免命令行）
+
+立维志愿提供 **Windows / macOS / Linux** 三平台安装包：
+
+1. 打开 [GitHub Releases](https://github.com/XucroYuri/lever-gaokao/releases)，下载对应系统的安装包：
+   - Windows：`立维志愿-Setup-x64.exe`（安装器）
+   - macOS：`立维志愿-mac-arm64`（或 x64，Intel 机型）
+   - Linux：`立维志愿-linux-x86_64`（AppImage/可执行）
+2. 双击安装（Windows 安装器会创建桌面快捷方式），运行"立维志愿"。
+3. 首次启动自动打开**配置向导**：填 DeepSeek API Key（[platform.deepseek.com](https://platform.deepseek.com) 申请）→ 点"打开主界面"。
+4. 开始对话——模型会用「立维问诊」逐层收集考生信息，再查询官方数据给出分析。
+
+> 包内已内置：DeepSeek Harness 运行时 + 立维志愿插件（6 工具）+ 官方数据层（山东样例）+ 峰谷闲时省钱提示。无需安装 Node/Python/dsh。
+> 校验安装包完整性：Release 页附带 `SHA256SUMS.txt`。
+
 ---
 
 ## 一、这是什么（30 秒看懂）

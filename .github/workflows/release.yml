@@ -51,11 +51,21 @@ jobs:
           npm run build
           npm run build:release
 
+      # Windows 额外：NSIS 安装器（Setup.exe + 桌面快捷方式 + 卸载器）
+      - name: 打包 Windows 安装器（NSIS）
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          choco install nsis -y --no-progress
+          cd dsh-lever-gaokao/distribution/installer
+          makensis /V3 installer.nsi
+
       - name: 上传产物
         uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.artifact }}
-          path: dsh-lever-gaokao/distribution/out/*
+          path: |
+            dsh-lever-gaokao/distribution/out/*
           if-no-files-found: error
 
   # 汇总产物到 GitHub Release
