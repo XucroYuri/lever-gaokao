@@ -235,6 +235,10 @@ def validate(args: argparse.Namespace) -> None:
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"校验报告 -> {out_path}")
+    if args.json:
+        # 单行 JSON，供程序化调用（dsh 等）直接解析
+        print(json.dumps(report, ensure_ascii=False))
+        return
     print(json.dumps(report, ensure_ascii=False, indent=2))
 
 
@@ -308,6 +312,25 @@ def query(args: argparse.Namespace) -> None:
     rows = con.execute(sql, params).fetchall()
     con.close()
 
+    # JSON 输出（供 dsh 等程序化调用方使用）
+    if args.json:
+        import json as _json
+        if args.table == "school":
+            payload = [
+                {"school": r[0], "category": r[1], "batch": r[2],
+                 "min_rank": r[3], "is_985": bool(r[4]), "is_211": bool(r[5])}
+                for r in rows
+            ]
+        else:
+            payload = [
+                {"school": r[0], "major": r[1], "major_group": r[2],
+                 "subject_req": r[3], "min_rank": r[4], "tuition": r[5]}
+                for r in rows
+            ]
+        print(_json.dumps({"table": args.table, "count": len(payload), "rows": payload},
+                          ensure_ascii=False))
+        return
+
     # 输出结果
     print(f"查询条件: 省份={args.province or '全部'} 年份={args.year or '全部'} "
           f"科类={args.category or '全部'} 位次[{args.min_rank or '-∞'}, {args.max_rank or '+∞'}] "
@@ -358,6 +381,7 @@ def main() -> None:
     p_val = sub.add_parser("validate", help="校验已入库数据")
     p_val.add_argument("--db", default="data/gaokao.duckdb")
     p_val.add_argument("--output", default=None)
+    p_val.add_argument("--json", action="store_true", help="单行 JSON 输出（供程序化调用）")
     p_val.set_defaults(func=validate)
 
     p_query = sub.add_parser("query", help="约束查询（位次/学费/科类/选科/层级）")
@@ -373,6 +397,7 @@ def main() -> None:
     p_query.add_argument("--max-tuition", default=None, type=int, help="学费上限（元/年）")
     p_query.add_argument("--level", choices=["985", "211"], default=None)
     p_query.add_argument("--limit", default=30, type=int)
+    p_query.add_argument("--json", action="store_true", help="输出 JSON（供程序化调用）")
     p_query.set_defaults(func=query)
 
     p_correct = sub.add_parser("correct", help="人工纠正（写入 correction_log）")
