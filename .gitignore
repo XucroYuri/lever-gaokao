@@ -28,6 +28,8 @@ build/
 .venv/
 venv/
 env/
+node_modules/
+dsh-lever-gaokao/lib/
 
 # Agent and local tool state
 .codex/

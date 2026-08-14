@@ -1,0 +1,17 @@
+# dsh-lever-gaokao bundle：在 dsh profile 中挂载高考志愿插件。
+# 用法：在你的 profile cordis.patch.yml 中 insert 本行（或把本文件并入 profile patch）。
+# 之后模型即可调用 gaokao_query / gaokao_validate / gaokao_cost_estimate。
+
+- insert:
+    - id: lever-gaokao
+      name: 'dsh-lever-gaokao'
+      config:
+        bridge:
+          python: 'python'
+          scriptDir: 'E:/Code/Github/lever-gaokao/lever-gaokao/scripts'
+          dataDir: 'E:/Code/Github/lever-gaokao/data'
+        pricing:
+          inputPerM: 1.0
+          outputPerM: 4.0
+          offPeakFactor: 0.5
+        allowTableSwitch: true
