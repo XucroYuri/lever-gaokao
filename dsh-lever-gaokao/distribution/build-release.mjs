@@ -18,7 +18,7 @@ const OUT = resolve(ROOT, 'out')
 const ENTRY = resolve(ROOT, 'lib', 'index.js')
 
 /** pkg 目标：node24（SEA 模式需要 Node 22+；与 dsh 官方打包一致） */
-const TARGETS = [
+const ALL_TARGETS = [
   ['node24-win-x64', '立维志愿-win-x64.exe'],
   ['node24-win-arm64', '立维志愿-win-arm64.exe'],
   ['node24-macos-x64', '立维志愿-mac-x64'],
@@ -26,6 +26,17 @@ const TARGETS = [
   ['node24-linux-x64', '立维志愿-linux-x64'],
   ['node24-linux-arm64', '立维志愿-linux-arm64'],
 ]
+
+// 平台过滤：CI 矩阵每平台只打本平台（PKG_PLATFORM=win|macos|linux），避免跨平台 wine 依赖
+const platformFilter = process.env.PKG_PLATFORM
+const TARGETS = platformFilter
+  ? ALL_TARGETS.filter(([target]) => target.includes(platformFilter))
+  : ALL_TARGETS
+
+if (TARGETS.length === 0) {
+  console.error(`[立维志愿] 无匹配平台目标: PKG_PLATFORM=${platformFilter}`)
+  process.exit(1)
+}
 
 if (!existsSync(ENTRY)) {
   console.error('[立维志愿] 未找到 lib/index.js，请先运行: npm run build')
@@ -37,7 +48,7 @@ for (const [target, outName] of TARGETS) {
   console.log(`[立维志愿] 打包 ${outName} (${target}) ...`)
   const r = spawnSync(
     'npx',
-    ['pkg', ENTRY, '--target', target, '--output', resolve(OUT, outName), '--no-bytecode'],
+    ['pkg', ENTRY, '--target', target, '--output', resolve(OUT, outName)],
     { cwd: ROOT, stdio: 'inherit', shell: process.platform === 'win32' },
   )
   if (r.status !== 0) {

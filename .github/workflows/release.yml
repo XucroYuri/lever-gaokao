@@ -15,10 +15,13 @@ jobs:
         include:
           - os: windows-latest
             artifact: 立维志愿-windows
+            platform: win
           - os: macos-latest
             artifact: 立维志愿-macos
+            platform: macos
           - os: ubuntu-latest
             artifact: 立维志愿-linux
+            platform: linux
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
@@ -46,6 +49,8 @@ jobs:
           npm install
 
       - name: 构建并打包
+        env:
+          PKG_PLATFORM: ${{ matrix.platform }}
         run: |
           cd dsh-lever-gaokao/distribution
           npm run build
