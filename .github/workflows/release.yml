@@ -1,0 +1,82 @@
+name: 立维志愿三平台发布
+
+# 触发：手动（workflow_dispatch）或推送 v* tag
+on:
+  workflow_dispatch:
+  push:
+    tags: ['v*']
+
+jobs:
+  # 各平台原生构建（pkg 本平台打本平台，避免 wine 跨平台依赖）
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            artifact: 立维志愿-windows
+          - os: macos-latest
+            artifact: 立维志愿-macos
+          - os: ubuntu-latest
+            artifact: 立维志愿-linux
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      # 数据层：采集基础样例数据（山东 2024 种子 + 2026 官方），失败不阻断打包（容错）
+      - name: 构建数据层（山东样例）
+        run: |
+          pip install duckdb python-calamine
+          python lever-gaokao/scripts/data_ingest.py ingest --province shandong --year 2024 || echo "[警告] 种子数据失败，跳过"
+          python lever-gaokao/scripts/data_collect.py collect --province shandong --year 2026 || echo "[警告] 官方一分一段失败，跳过"
+          python lever-gaokao/scripts/data_collect.py collect --province shandong --year 2026 --type toudang || echo "[警告] 投档线失败，跳过"
+        shell: bash
+
+      - name: 安装立维志愿依赖
+        run: |
+          cd dsh-lever-gaokao/distribution
+          npm install
+
+      - name: 构建并打包
+        run: |
+          cd dsh-lever-gaokao/distribution
+          npm run build
+          npm run build:release
+
+      - name: 上传产物
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.artifact }}
+          path: dsh-lever-gaokao/distribution/out/*
+          if-no-files-found: error
+
+  # 汇总产物到 GitHub Release
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v')
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: release-artifacts
+          merge-multiple: true
+
+      - name: 生成 SHA256 校验
+        run: |
+          cd release-artifacts
+          sha256sum * > SHA256SUMS.txt
+        shell: bash
+
+      - name: 发布到 GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: release-artifacts/*
+          generate_release_notes: true
