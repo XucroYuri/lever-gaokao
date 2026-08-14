@@ -1,4 +1,14 @@
-# dsh-lever-gaokao
+# 潜机 · Latent Edge（dsh-lever-gaokao）
+
+**潜机**（qián jī）——潜藏的机会。谐音"先机"：别人还没看到，你抢先看到了。出自易经《乾卦》
+"潜龙勿用"与佛家"禅机、玄机"的思辨：时机未显，先潜藏蓄力，待时而跃。对应本项目最独特的主张——
+帮考生用有限分数，买入被大多数人忽略、但长期更有价值的选择（低估机会发现）。
+
+**英文名 Latent Edge**：latent（潜藏/潜在，亚里士多德"潜能现实论"哲学出处）+ Edge（先机/优势），
+与"潜机"一一对应。技术标识保留 `lever-gaokao` / `dsh-lever-gaokao`（供开发与插件生态）。
+
+> 命名与注册备选：中文主名"潜机"；若两字商标注册受阻，备选"见潜机"（看见潜藏的机会，3 字）或
+> "潜机志愿"（4 字品类词，注册显著性强）；英文名 Latent Edge（"Hidden Edge"/"Qianji" 已查证被占用）。
 
 高考志愿填报的 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness)（`dsh`）插件。
 **BYOK 本地客户端**：用户自配 DeepSeek API Key，本地运行，零服务器成本；结合 DeepSeek 峰谷定价
