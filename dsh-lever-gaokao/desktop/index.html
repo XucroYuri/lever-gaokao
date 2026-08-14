@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>立维志愿 · 启动配置</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: linear-gradient(160deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+      color: #e8f1f5; min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 16px; padding: 36px 40px; width: 440px; max-width: 92vw; backdrop-filter: blur(8px);
+    }
+    h1 { font-size: 22px; margin-bottom: 4px; letter-spacing: 1px; }
+    .sub { color: #9fb3c0; font-size: 13px; margin-bottom: 24px; }
+    label { display: block; font-size: 13px; color: #c4d5df; margin: 14px 0 6px; }
+    input, select {
+      width: 100%; padding: 10px 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2);
+      background: rgba(0,0,0,0.3); color: #fff; font-size: 14px;
+    }
+    input:focus, select:focus { outline: none; border-color: #4fc3f7; }
+    .hint { font-size: 12px; color: #7e97a6; margin-top: 4px; }
+    button {
+      width: 100%; margin-top: 24px; padding: 12px; border: none; border-radius: 8px;
+      background: #4fc3f7; color: #08222c; font-size: 15px; font-weight: 600; cursor: pointer;
+    }
+    button:hover { background: #81d4fa; }
+    button:disabled { background: #3a5663; color: #8aa0ad; cursor: not-allowed; }
+    .offpeak { margin-top: 20px; padding: 12px; border-radius: 8px; background: rgba(76, 175, 80, 0.12); border: 1px solid rgba(76,175,80,0.3); font-size: 12px; color: #b9e6bb; }
+    .status { margin-top: 14px; font-size: 13px; color: #ffd54f; min-height: 18px; }
+    .err { color: #ff8a80; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>立维志愿 · 启动配置</h1>
+    <div class="sub">高考志愿填报 AI 助手（BYOK 本地客户端，零服务器成本）</div>
+
+    <label>DeepSeek API Key</label>
+    <input id="apiKey" type="password" placeholder="sk-..." />
+    <div class="hint">在 platform.deepseek.com 申请；只存在本机，不上传任何服务器</div>
+
+    <label>Base URL</label>
+    <input id="baseUrl" value="https://api.deepseek.com" />
+
+    <label>模型</label>
+    <select id="model">
+      <option value="deepseek-v4-flash">deepseek-v4-flash（便宜，推荐）</option>
+      <option value="deepseek-v4-pro">deepseek-v4-pro（更强）</option>
+    </select>
+
+    <button id="startBtn">保存配置并启动立维志愿</button>
+    <div class="status" id="status"></div>
+
+    <div class="offpeak">
+      💡 <strong>省钱提示</strong>：DeepSeek 官方峰谷定价——高峰 9:00-12:00、14:00-18:00（价格翻倍），
+      其余闲时半价。重任务（候选发现/对抗审查）建议攒到闲时跑，成本减半。
+    </div>
+  </div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
