@@ -1,0 +1,19 @@
+{
+  "name": "liwei-zhiyuan-agent",
+  "version": "0.1.0",
+  "description": "立维志愿专用版 Agent：基于 DeepSeek Harness 的三平台可安装客户端（Windows/macOS/Linux）",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "build:release": "node build-release.mjs"
+  },
+  "dependencies": {
+    "@deepseek-ai/dsh": "^0.1.0-rc.6",
+    "dsh-lever-gaokao": "file:.."
+  },
+  "devDependencies": {
+    "@yao-pkg/pkg": "^6.21.0",
+    "typescript": "^5.5.0"
+  }
+}

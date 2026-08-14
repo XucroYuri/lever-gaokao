@@ -1,0 +1,16 @@
+# 立维志愿专用 profile：随包预装插件与数据路径。
+# 打包进单文件可执行；dataDir 指向随包 data/（相对可执行文件位置，运行时探测）。
+
+- insert:
+    - id: lever-gaokao
+      name: 'dsh-lever-gaokao'
+      config:
+        bridge:
+          python: 'python'
+          scriptDir: './data/lever-gaokao/scripts'
+          dataDir: './data'
+        pricing:
+          inputPerM: 3.0        # deepseek-v4-flash 官方高峰输入价（元/百万 token）
+          outputPerM: 9.0       # 官方高峰输出价
+          offPeakFactor: 0.5    # 官方闲时系数
+        allowTableSwitch: true
