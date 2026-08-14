@@ -18,6 +18,7 @@ import type { BridgeConfig } from './bridge.js'
 import { registerQueryTool } from './tools/query.js'
 import { registerValidateTool } from './tools/validate.js'
 import { registerCostTool } from './tools/cost.js'
+import { registerIntakeTool } from './tools/intake.js'
 import type { DeepSeekPricing } from './deepseek-pricing.js'
 
 export const name = 'dsh-lever-gaokao'
@@ -39,4 +40,5 @@ export function apply(ctx: Context, config: Partial<GaokaoConfig> = {}): void {
   registerQueryTool(ctx, { ...bridge, allowTableSwitch: config.allowTableSwitch })
   registerValidateTool(ctx, bridge)
   registerCostTool(ctx, { pricing: config.pricing })
+  registerIntakeTool(ctx)
 }
