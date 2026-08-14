@@ -23,6 +23,7 @@
 | `gaokao_query` | 高考志愿数据约束查询：按位次区间/科类/选科/学费上限/院校层级查询本地 DuckDB（数据来自各省考试院官方源），返回院校与专业，按位次升序 |
 | `gaokao_validate` | 数据质量校验：各表行数、一分一段完整性、字段覆盖率，输出 JSON 报告 |
 | `gaokao_cost_estimate` | DeepSeek API 成本估算：按任务类型（问诊/候选发现/对抗审查/完整分析）估算高峰/闲时价格，引导闲时运行重任务省钱 |
+| `gaokao_offpeak` | **潜机闲时**：判断当前是否为 DeepSeek 官方峰谷闲时，输出成本对比 + 下一个闲时窗口的 `after_seconds`，供 `schedule_create` 把重任务调度到闲时自动执行 |
 
 ## 原理
 
@@ -86,14 +87,13 @@ npx tsc -p tsconfig.json                                # 类型检查
 node smoke.mjs                                          # 冒烟测试（直接验证工具执行路径）
 ```
 
-## 成本与峰谷说明
+## 成本与峰谷说明（DeepSeek 官方基准，2026-08-17 生效）
 
-- 定价表 `src/deepseek-pricing.ts`：`inputPerM`/`outputPerM`（元/百万 token，高峰价）、
-  `offPeakFactor`（默认 0.5 = 闲时半价）。**占位值需按 DeepSeek 官方价覆盖**。
-- 任务 token 估算为占位（intake 2.4 万 / candidate_search 7 万 / adversarial_review 12 万 /
-  full_report 24 万 token），可按实测调整。
-- 峰谷时段近似 22:00-08:00，正式实现以 DeepSeek 公告为准。
-- 完整分析（含问诊+候选发现+对抗审查）在默认占位价下约 0.36 元（高峰）/ 0.18 元（闲时）。
+- **官方峰谷时段**（北京时间）：高峰 = 9:00-12:00、14:00-18:00；其余为闲时，**闲时 = 高峰半价**（DeepSeek 官方公告，2026-08-13 发布）。
+- **官方价格**（元/百万 token）：`deepseek-v4-flash` 高峰输入 3.0 / 输出 9.0，闲时 1.5 / 4.5；`deepseek-v4-pro` 高峰输入 9.0 / 输出 27.0，闲时 4.5 / 13.5。定价表见 `src/deepseek-pricing.ts`（默认 v4-flash）。
+- 任务 token 估算为占位（intake 2.4 万 / candidate_search 7 万 / adversarial_review 12 万 / full_report 24 万 token，含缓存命中比例），可按实测调整。
+- 完整分析（问诊+候选发现+对抗审查）按官方 v4-flash 价约 **0.79 元（高峰）/ 0.39 元（闲时）**——重任务攒到闲时跑，成本减半。
+- `gaokao_offpeak` 工具提供下一个闲时窗口的 `after_seconds`，配合 dsh `schedule_create` 自动调度重任务到闲时。
 
 ## 边界与免责
 

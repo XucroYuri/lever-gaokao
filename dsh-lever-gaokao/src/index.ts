@@ -19,6 +19,7 @@ import { registerQueryTool } from './tools/query.js'
 import { registerValidateTool } from './tools/validate.js'
 import { registerCostTool } from './tools/cost.js'
 import { registerIntakeTool } from './tools/intake.js'
+import { registerOffPeakTool } from './tools/offpeak.js'
 import type { DeepSeekPricing } from './deepseek-pricing.js'
 
 export const name = 'dsh-lever-gaokao'
@@ -41,4 +42,5 @@ export function apply(ctx: Context, config: Partial<GaokaoConfig> = {}): void {
   registerValidateTool(ctx, bridge)
   registerCostTool(ctx, { pricing: config.pricing })
   registerIntakeTool(ctx)
+  registerOffPeakTool(ctx, { pricing: config.pricing })
 }

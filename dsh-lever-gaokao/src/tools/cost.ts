@@ -39,7 +39,7 @@ export function registerCostTool(ctx: Context, cfg: CostToolConfig = {}): void {
       const lines = [
         `任务类型: ${estimate.taskType}`,
         `高峰价格: 约 ${estimate.peakCostYuan} 元`,
-        `闲时价格: 约 ${estimate.offPeakCostYuan} 元（${estimate.offPeakHours}）`,
+        `闲时价格: 约 ${estimate.offPeakCostYuan} 元（${estimate.peakHours}）`,
         `闲时节省: 约 ${estimate.savingYuan} 元`,
         `当前时段: ${offPeak ? '闲时 ✅ 建议现在运行' : '高峰 ⏳ 重任务建议攒到闲时运行'}`,
       ]
