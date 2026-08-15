@@ -21,6 +21,7 @@ import { registerCostTool } from './tools/cost.js'
 import { registerIntakeTool } from './tools/intake.js'
 import { registerOffPeakTool } from './tools/offpeak.js'
 import { registerCheckUpdateTool, readLocalVersion, fetchRemoteVersion } from './tools/check_update.js'
+import { registerUpdateTool } from './tools/update.js'
 import type { DeepSeekPricing } from './deepseek-pricing.js'
 
 export const name = 'dsh-lever-gaokao'
@@ -46,6 +47,7 @@ export function apply(ctx: Context, config: Partial<GaokaoConfig> = {}): void {
   registerOffPeakTool(ctx, { pricing: config.pricing })
   const dataDir = bridge.dataDir ?? '../data'
   registerCheckUpdateTool(ctx, { dataDir })
+  registerUpdateTool(ctx, bridge)
 
   // 启动时静默检查一次数据版本（可更新则提示；失败不阻塞）
   void (async () => {

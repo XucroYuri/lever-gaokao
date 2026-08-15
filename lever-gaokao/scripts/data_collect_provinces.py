@@ -25,6 +25,13 @@ PROVINCE_PAGES: dict[str, dict[int, str]] = {
     "beijing": {
         2026: "https://www.bjeea.cn/html/gkgz/tzgg/2026/0624/88238.html",
     },
+    # 天津：PDF 直链（3+3 综合，2026）
+    "tianjin": {
+        2026: "https://www.zhaokao.net/gkck/doc/003/000/115/00300011511_809a8ff0.pdf",
+    },
+    # 待补完整 URL（需官网确认）：
+    # 吉林 jleea.com.cn 官方 PDF（/u/cms/www/2026/06/25/...pdf）
+    # 安徽 ahzsks.cn（/ggl/8996.htm + PDF /pic/file/20260625/...335.pdf）
 }
 
 # 辽宁一分一段 PDF（物理/历史分卷，官方直链）
@@ -269,6 +276,29 @@ def collect_guizhou(data_dir: Path, year: int) -> None:
     _store_yifenyiduan_multi(data_dir, "贵州", year, rows_by_cat, sources)
 
 
+def collect_pdf_direct(data_dir: Path, province: str, year: int, pdf_url: str) -> None:
+    """PDF 直链采集（如天津 3+3 综合一分一段）：下载直链 → 解析 → 入库 + 原文归档。"""
+    fname = "yifenyiduan.pdf"
+    pdf_path = OFFICIAL_SOURCES / "yifenyiduan" / province / str(year) / fname
+    pdf_path.parent.mkdir(parents=True, exist_ok=True)
+    print(f"下载 {province} 一分一段 PDF: {pdf_url}")
+    _download(pdf_url, pdf_path)
+    rows = _parse_score_distribution_pdf(pdf_path)
+    if not rows:
+        raise SystemExit("PDF 未解析出数据行（可能是扫描件/无文本层）")
+    print(f"  {province}: {len(rows)} 行（累计至 {rows[-1]['cumulative_count']}）")
+    _store_yifenyiduan_multi(
+        data_dir, province, year,
+        {category_name(province): rows},
+        {category_name(province): (pdf_url, fname)},
+    )
+
+
+def category_name(province: str) -> str:
+    """3+3 综合省份的科类名（天津等），3+1+2 省份用物理/历史分开。"""
+    return "综合"
+
+
 def collect_cmd(args: argparse.Namespace) -> None:
     province = args.province
     year = args.year
@@ -292,6 +322,9 @@ def collect_cmd(args: argparse.Namespace) -> None:
         raise SystemExit(f"无 {year} 年{province}发布页记录（已知：{list(pages)}）")
     if province == "beijing":
         collect_beijing(data_dir, year, page_url)
+    elif province == "tianjin":
+        # 天津为 PDF 直链（3+3 综合），URL 即 PDF 文件
+        collect_pdf_direct(data_dir, "天津", year, page_url)
     else:
         raise SystemExit(f"未实现 {province} 采集器")
 
