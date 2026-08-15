@@ -6,6 +6,9 @@ on:
   push:
     tags: ['v*']
 
+permissions:
+  contents: write
+
 jobs:
   # 各平台原生构建（pkg 本平台打本平台，避免 wine 跨平台依赖）
   build:
@@ -95,4 +98,14 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: release-artifacts/*
-          generate_release_notes: true
+          body: |
+            ## 立维志愿 v0.1.0
+
+            高考志愿填报 AI 助手 · Windows / macOS / Linux 三平台客户端。
+
+            **下载**：选择对应系统的文件，双击运行（Windows 安装器 `立维志愿-Setup-x64.exe`）。
+            **首次使用**：启动后自动打开向导 → 填 DeepSeek API Key → 开始问诊。
+            **省钱**：内置 DeepSeek 官方峰谷定价引导（高峰 9-12、14-18，闲时半价），重任务攒到闲时跑成本减半。
+
+            **校验**：`SHA256SUMS.txt` 提供各文件完整性校验。
+            **说明**：数据层内置山东样例（官方源，可自行扩展）；完整使用见仓库 GUIDE.md。
