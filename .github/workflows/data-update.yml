@@ -1,9 +1,8 @@
-name: 立维志愿数据更新
+name: 立维志愿数据发布
 
 # 触发：手动（workflow_dispatch）+ 定时（高考关键节点，北京时间晚间）
-#   - 6月24日：出分后（省控线/一分一段发布期）
-#   - 7月5日：投档期（投档线发布）
-#   - 7月20日：征集/录取期
+# 说明：数据采集以本地维护者执行为主（GitHub Actions 海外 runner 访问国内政府站受限，
+#       远程采集不可靠）；本 workflow 负责校验已提交数据并发布数据包 Release。
 on:
   workflow_dispatch:
   schedule:
@@ -15,7 +14,7 @@ permissions:
   contents: write
 
 jobs:
-  update-data:
+  publish-data:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -27,52 +26,26 @@ jobs:
       - name: 安装数据层依赖
         run: pip install duckdb python-calamine
 
-      # 各省官方源采集（容错：某省失败不阻断其余）
-      - name: 采集官方数据（山东/浙江/北京/辽宁/贵州）
+      # 校验已提交数据并生成版本（本地采集结果随 data/version.json 提交到仓库）
+      - name: 校验并生成版本
         shell: bash
         run: |
-          python lever-gaokao/scripts/data_ingest.py ingest --province shandong --year 2024 || echo "[skip] 种子数据"
-          for cmd in \
-            "collect --province shandong --year 2026" \
-            "collect --province shandong --year 2026 --type toudang" \
-            "collect --province zhejiang --year 2026 --type toudang" \
-            "collect --province beijing --year 2026" \
-            "collect --province liaoning --year 2026" \
-            "collect --province guizhou --year 2026"; do
-            python lever-gaokao/scripts/data_collect.py $cmd 2>/dev/null || \
-            python lever-gaokao/scripts/data_collect_provinces.py $cmd 2>/dev/null || \
-            echo "[skip] $cmd"
-          done
-          # 校验 + 版本化
-          python lever-gaokao/scripts/data_ingest.py validate --json || true
-          python lever-gaokao/scripts/data_version.py
+          python lever-gaokao/scripts/data_ingest.py validate --json || echo "[skip] 无本地库（未采集）"
+          python lever-gaokao/scripts/data_version.py || echo "[skip] 无数据可版本化"
 
-      - name: 提交版本文件（data/version.json）
-        shell: bash
-        run: |
-          git config user.name "lever-gaokao-bot"
-          git config user.email "bot@lever-gaokao.local"
-          git add data/version.json
-          if git diff --cached --quiet; then
-            echo "版本无变化"
-          else
-            # 先同步远端（避免 push rejected），推送失败容错（下次运行重试）
-            git pull --rebase origin main --autostash || true
-            git push origin main || echo "[skip] 推送被拒（远端有更新），版本文件将在下次提交"
-          fi
-
-      # 数据包（duckdb + 版本 + 官方原文清单）打包
+      # 打包数据包：duckdb（若存在）+ version.json + 校验
       - name: 打包数据包
         shell: bash
         run: |
           mkdir -p dist-data
-          cp data/gaokao.duckdb dist-data/ 2>/dev/null || true
-          cp data/version.json dist-data/
-          cp -r official-sources dist-data/ 2>/dev/null || true
-          cd dist-data && sha256sum * > SHA256SUMS.txt 2>/dev/null || true
+          [ -f data/gaokao.duckdb ] && cp data/gaokao.duckdb dist-data/ || true
+          [ -f data/version.json ] && cp data/version.json dist-data/ || true
+          cd dist-data
+          if [ -f version.json ]; then sha256sum * > SHA256SUMS.txt; fi
 
-      # 发布数据包到 GitHub Release（tag: data-{version}），供客户端下载更新
+      # 发布数据包 Release（tag: data-{version}），供客户端下载更新
       - name: 发布数据包 Release
+        if: hashFiles('dist-data/version.json') != ''
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
@@ -81,9 +54,12 @@ jobs:
           TAG="data-$VERSION"
           echo "发布数据包 tag=$TAG"
           gh release delete "$TAG" --yes --cleanup-tag 2>/dev/null || true
-          gh release create "$TAG" dist-data/* \
+          # 只上传文件（gh 不支持上传目录）；duckdb 存在时一并上传
+          FILES="dist-data/version.json dist-data/SHA256SUMS.txt"
+          [ -f dist-data/gaokao.duckdb ] && FILES="$FILES dist-data/gaokao.duckdb"
+          gh release create "$TAG" $FILES \
             --title "立维志愿数据包 v$VERSION" \
-            --notes "各省考试院官方源数据（一分一段/投档线/院校名单）+ 版本清单 SHA256SUMS.txt。客户端可通过 gaokao_check_update 检测并在有更新时下载本数据包。"
+            --notes "数据版本清单 + SHA256 校验。客户端通过 gaokao_check_update 检测版本，本地采集官方数据（见 GUIDE.md）或下载本数据包更新。"
 
       - name: 上传数据包（artifact 存档）
         uses: actions/upload-artifact@v4
