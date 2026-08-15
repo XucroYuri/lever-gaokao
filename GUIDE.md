@@ -216,6 +216,54 @@ npm run tauri build   # 打包安装包
 | 中文输出乱码 | Windows 控制台 GBK 导致；数据层脚本已内置 `PYTHONIOENCODING=utf-8` 处理，dsh 内正常 |
 | 高峰时段太贵 | 用 `gaokao_offpeak` + `schedule_create` 把重任务排到闲时（半价） |
 | 想换 v4-pro | 改 plugin config 的 `pricing` 为 pro 价（9.0/27.0），模型选 `deepseek-v4-pro` |
+| 数据太旧/查不到新省 | 运行 `data_update.py check` 看最新数据包，或本地采集官方数据（见下节） |
+
+---
+
+## 十之一、数据维护与更新
+
+数据（各省考试院官方源：一分一段/投档线/院校名单）需要长期维护，立维志愿提供三套机制：
+
+### 1. 数据版本化
+
+`data/version.json`（随仓库提交）记录：数据版本、覆盖省份、**缺口提示**、来源核验状态：
+
+```bash
+python lever-gaokao/scripts/data_version.py
+# 输出示例：数据版本 2026.1
+#   覆盖: score_range(北京/山东/辽宁/贵州...)
+#   缺口提示: score_range 缺 27 省（天津/河北/...）
+```
+
+### 2. 自动检查更新（客户端）
+
+立维志愿插件启动时**静默检查**仓库最新数据版本；也可手动让模型调用 `gaokao_check_update`：
+
+- 返回：本地版本 vs 仓库最新版本、是否可更新、覆盖情况
+- 有更新时提示"建议运行数据更新或下载最新数据包"
+
+### 3. 获取新数据（两种方式）
+
+**方式 A：下载官方数据包**（CI 自动发布到 GitHub Release，tag `data-{版本}`）：
+
+```bash
+python lever-gaokao/scripts/data_update.py check    # 看最新数据包
+python lever-gaokao/scripts/data_update.py update   # 下载 + SHA256 校验 + 应用到 data/
+```
+
+**方式 B：本地采集官方数据**（最可靠——GitHub CI 在海外，访问国内政府站受限）：
+
+```bash
+# 采集指定省当年官方数据（一分一段/投档线）
+python lever-gaokao/scripts/data_collect.py collect --province 山东 --year 2026
+python lever-gaokao/scripts/data_collect.py collect --province 山东 --year 2026 --type toudang
+python lever-gaokao/scripts/data_collect_provinces.py collect --province 北京 --year 2026
+```
+
+采集后运行 `data_version.py` 更新版本，并建议提交 `data/version.json`（供所有用户检测到更新）。
+
+> **维护分工**：数据采集以本地执行为主（可靠）；CI 负责校验、打包、发布数据包 Release；
+> 客户端通过 `gaokao_check_update` 检测版本、`data_update.py` 拉取数据包。
 
 ---
 

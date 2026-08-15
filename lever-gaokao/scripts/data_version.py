@@ -27,6 +27,22 @@ from pathlib import Path
 import duckdb
 
 
+# 目标覆盖省份（31 省级行政区；按数据类型区分所需覆盖）
+ALL_PROVINCES = [
+    "北京", "天津", "河北", "山西", "内蒙古", "辽宁", "吉林", "黑龙江",
+    "上海", "江苏", "浙江", "安徽", "福建", "江西", "山东", "河南",
+    "湖北", "湖南", "广东", "广西", "海南", "重庆", "四川", "贵州",
+    "云南", "西藏", "陕西", "甘肃", "青海", "宁夏", "新疆",
+]
+
+# 各数据类型的目标覆盖（一分一段/投档线全国 31 省；院校名单全国）
+TARGET_COVERAGE: dict[str, list[str]] = {
+    "score_range": ALL_PROVINCES,
+    "toudang": ALL_PROVINCES,
+    "school_dim": ["全国"],
+}
+
+
 def build_version(con: duckdb.DuckDBPyConnection) -> dict:
     sources = con.execute(
         "SELECT source_name, source_type, province, year, data_type, verified "
@@ -45,6 +61,14 @@ def build_version(con: duckdb.DuckDBPyConnection) -> dict:
             "year": year, "data_type": dtype, "verified": bool(verified),
         })
 
+    # 省份覆盖对比：各数据类型缺哪些省份
+    coverage_gaps: dict[str, list[str]] = {}
+    for key, targets in TARGET_COVERAGE.items():
+        covered = set(coverage.get(key, {}).keys())
+        gaps = [p for p in targets if p not in covered]
+        if gaps:
+            coverage_gaps[key] = gaps
+
     # 数据包版本：取已采集的最大年份（如 2026.1）
     years = [int(y) for y in {s["year"] for s in source_rows if s["year"]}]
     max_year = max(years) if years else 0
@@ -62,6 +86,7 @@ def build_version(con: duckdb.DuckDBPyConnection) -> dict:
         "data_version": data_version,
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "coverage": coverage,
+        "coverage_gaps": coverage_gaps,
         "sources": source_rows,
         "stats": stats,
     }
@@ -85,6 +110,13 @@ def main() -> None:
         f"{k}({'/'.join(f'{p}:{",".join(map(str, ys))}' for p, ys in v.items())})"
         for k, v in version["coverage"].items()
     ))
+    if version.get("coverage_gaps"):
+        print("缺口提示（建议补充官方源）: " + "; ".join(
+            f"{k} 缺 {len(g)} 省（{'/'.join(g[:8])}{'…' if len(g) > 8 else ''}）"
+            for k, g in version["coverage_gaps"].items()
+        ))
+    else:
+        print("缺口提示: 无（目标省份已全覆盖）")
     print(f"来源 {len(version['sources'])} 条，其中已核验 {sum(1 for s in version['sources'] if s['verified'])} 条")
 
 
