@@ -63,7 +63,8 @@ jobs:
         run: |
           choco install nsis -y --no-progress
           cd dsh-lever-gaokao/distribution/installer
-          & "C:\Program Files (x86)\NSIS\makensis.exe" /V3 installer.nsi
+          # /INPUTCHARSET UTF8：脚本含中文文件名（立维志愿-win-x64.exe），默认 ACP 会匹配失败
+          & "C:\Program Files (x86)\NSIS\makensis.exe" /V3 /INPUTCHARSET UTF8 installer.nsi
 
       - name: 上传产物
         uses: actions/upload-artifact@v4
