@@ -38,9 +38,25 @@ fn start_dsh() -> Result<String, String> {
     Ok("started".into())
 }
 
+/// 运行数据更新：调用 python data_update.py update（下载数据包 + SHA256 校验 + 应用）。
+/// 返回脚本输出；失败返回错误信息。脚本路径按安装目录相对位置（桌面端随包 data 脚本）。
+#[tauri::command]
+fn run_data_update() -> Result<String, String> {
+    let mut cmd = Command::new("python");
+    cmd.args(["lever-gaokao/scripts/data_update.py", "update"]);
+    let output = cmd.output().map_err(|e| format!("运行数据更新失败：{}", e))?;
+    let out = String::from_utf8_lossy(&output.stdout).to_string();
+    let err = String::from_utf8_lossy(&output.stderr).to_string();
+    if output.status.success() {
+        Ok(if out.trim().is_empty() { err } else { out })
+    } else {
+        Err(format!("数据更新失败：{}", if err.trim().is_empty() { out } else { err }))
+    }
+}
+
 fn main() {
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![start_dsh])
+        .invoke_handler(tauri::generate_handler![start_dsh, run_data_update])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

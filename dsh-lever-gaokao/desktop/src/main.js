@@ -12,6 +12,8 @@ const baseUrlEl = document.getElementById('baseUrl')
 const modelEl = document.getElementById('model')
 const startBtn = document.getElementById('startBtn')
 const statusEl = document.getElementById('status')
+const updateBtn = document.getElementById('updateBtn')
+const updateStatusEl = document.getElementById('updateStatus')
 
 // 载入已保存配置
 const saved = JSON.parse(localStorage.getItem('liwei-config') || '{}')
@@ -71,4 +73,19 @@ startBtn.addEventListener('click', async () => {
     startBtn.disabled = false
     setStatus('等待超时：请确认已安装 Node.js（>=20）后重试', true)
   }
+})
+
+// 数据更新：调 Rust run_data_update（python data_update.py update）
+updateBtn.addEventListener('click', async () => {
+  updateBtn.disabled = true
+  updateStatusEl.textContent = '正在检查并更新数据包（SHA256 校验）...'
+  updateStatusEl.className = 'status'
+  try {
+    const result = await window.__TAURI__.core.invoke('run_data_update')
+    updateStatusEl.textContent = String(result).slice(0, 400)
+  } catch (e) {
+    updateStatusEl.textContent = String(e).slice(0, 400)
+    updateStatusEl.className = 'status err'
+  }
+  updateBtn.disabled = false
 })
