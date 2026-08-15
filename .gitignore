@@ -30,6 +30,7 @@ venv/
 env/
 node_modules/
 dsh-lever-gaokao/lib/
+dsh-lever-gaokao/distribution/lib/
 
 # Agent and local tool state
 .codex/
