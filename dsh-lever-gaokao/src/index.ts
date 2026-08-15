@@ -20,6 +20,7 @@ import { registerValidateTool } from './tools/validate.js'
 import { registerCostTool } from './tools/cost.js'
 import { registerIntakeTool } from './tools/intake.js'
 import { registerOffPeakTool } from './tools/offpeak.js'
+import { registerCheckUpdateTool, readLocalVersion, fetchRemoteVersion } from './tools/check_update.js'
 import type { DeepSeekPricing } from './deepseek-pricing.js'
 
 export const name = 'dsh-lever-gaokao'
@@ -43,4 +44,23 @@ export function apply(ctx: Context, config: Partial<GaokaoConfig> = {}): void {
   registerCostTool(ctx, { pricing: config.pricing })
   registerIntakeTool(ctx)
   registerOffPeakTool(ctx, { pricing: config.pricing })
+  const dataDir = bridge.dataDir ?? '../data'
+  registerCheckUpdateTool(ctx, { dataDir })
+
+  // 启动时静默检查一次数据版本（可更新则提示；失败不阻塞）
+  void (async () => {
+    try {
+      const local = readLocalVersion(dataDir)
+      if (!local) return
+      const remote = await fetchRemoteVersion('XucroYuri/lever-gaokao')
+      if (remote && remote.data_version !== local.data_version) {
+        console.warn(
+          `[立维志愿] 检测到新数据版本 ${remote.data_version}（本地 ${local.data_version}），` +
+          `建议运行 gaokao_check_update 或更新数据包`,
+        )
+      }
+    } catch {
+      /* 静默 */
+    }
+  })()
 }

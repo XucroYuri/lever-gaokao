@@ -60,7 +60,7 @@ jobs:
             git push origin main
           fi
 
-      # 数据包（duckdb + 版本 + 官方原文清单）打包为 artifact，供人工/发布用
+      # 数据包（duckdb + 版本 + 官方原文清单）打包
       - name: 打包数据包
         shell: bash
         run: |
@@ -70,7 +70,21 @@ jobs:
           cp -r official-sources dist-data/ 2>/dev/null || true
           cd dist-data && sha256sum * > SHA256SUMS.txt 2>/dev/null || true
 
-      - name: 上传数据包
+      # 发布数据包到 GitHub Release（tag: data-{version}），供客户端下载更新
+      - name: 发布数据包 Release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          VERSION=$(python -c "import json;print(json.load(open('dist-data/version.json'))['data_version'])")
+          TAG="data-$VERSION"
+          echo "发布数据包 tag=$TAG"
+          gh release delete "$TAG" --yes --cleanup-tag 2>/dev/null || true
+          gh release create "$TAG" dist-data/* \
+            --title "立维志愿数据包 v$VERSION" \
+            --notes "各省考试院官方源数据（一分一段/投档线/院校名单）+ 版本清单 SHA256SUMS.txt。客户端可通过 gaokao_check_update 检测并在有更新时下载本数据包。"
+
+      - name: 上传数据包（artifact 存档）
         uses: actions/upload-artifact@v4
         with:
           name: liwei-data-package
