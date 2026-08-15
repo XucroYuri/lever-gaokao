@@ -165,5 +165,47 @@ def validate_data() -> str:
     return json.dumps(report, ensure_ascii=False, indent=2)
 
 
+@server.tool(description="检查本地数据版本与覆盖情况，可选用联网对比仓库最新数据版本（判断是否可更新）。")
+def check_update(check_remote: bool = False) -> str:
+    """数据版本检查：本地 data/version.json vs 仓库最新（可选联网）。"""
+    import urllib.request
+
+    ver_path = Path("data/version.json")
+    result: dict = {"local": None, "coverage": {}, "remote": None, "update_available": False}
+    if ver_path.exists():
+        try:
+            local = json.loads(ver_path.read_text(encoding="utf-8"))
+            result["local"] = local.get("data_version")
+            result["coverage"] = local.get("coverage", {})
+            result["sources_total"] = len(local.get("sources", []))
+            result["verified_total"] = sum(
+                1 for s in local.get("sources", []) if s.get("verified")
+            )
+        except Exception as e:
+            result["local_error"] = str(e)
+    else:
+        result["local_error"] = "缺少 data/version.json（尚未生成数据版本）"
+
+    if check_remote:
+        try:
+            req = urllib.request.Request(
+                "https://api.github.com/repos/XucroYuri/lever-gaokao/contents/data/version.json",
+                headers={"User-Agent": "lever-gaokao-mcp", "Accept": "application/vnd.github+json"},
+            )
+            with urllib.request.urlopen(req, timeout=20) as resp:
+                payload = json.loads(resp.read())
+            import base64
+
+            remote = json.loads(base64.b64decode(payload["content"]))
+            result["remote"] = remote.get("data_version")
+            result["remote_updated_at"] = remote.get("generated_at")
+            if result["local"] and result["remote"]:
+                result["update_available"] = result["remote"] != result["local"]
+        except Exception as e:
+            result["remote_error"] = str(e)
+
+    return json.dumps(result, ensure_ascii=False, indent=2)
+
+
 if __name__ == "__main__":
     server.run(transport="stdio")

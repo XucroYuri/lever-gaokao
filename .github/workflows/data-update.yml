@@ -1,0 +1,77 @@
+name: 立维志愿数据更新
+
+# 触发：手动（workflow_dispatch）+ 定时（高考关键节点，北京时间晚间）
+#   - 6月24日：出分后（省控线/一分一段发布期）
+#   - 7月5日：投档期（投档线发布）
+#   - 7月20日：征集/录取期
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 22 24 6 *'
+    - cron: '0 22 5 7 *'
+    - cron: '0 22 20 7 *'
+
+permissions:
+  contents: write
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: 安装数据层依赖
+        run: pip install duckdb python-calamine
+
+      # 各省官方源采集（容错：某省失败不阻断其余）
+      - name: 采集官方数据（山东/浙江/北京/辽宁/贵州）
+        shell: bash
+        run: |
+          python lever-gaokao/scripts/data_ingest.py ingest --province shandong --year 2024 || echo "[skip] 种子数据"
+          for cmd in \
+            "collect --province shandong --year 2026" \
+            "collect --province shandong --year 2026 --type toudang" \
+            "collect --province zhejiang --year 2026 --type toudang" \
+            "collect --province beijing --year 2026" \
+            "collect --province liaoning --year 2026" \
+            "collect --province guizhou --year 2026"; do
+            python lever-gaokao/scripts/data_collect.py $cmd 2>/dev/null || \
+            python lever-gaokao/scripts/data_collect_provinces.py $cmd 2>/dev/null || \
+            echo "[skip] $cmd"
+          done
+          # 校验 + 版本化
+          python lever-gaokao/scripts/data_ingest.py validate --json || true
+          python lever-gaokao/scripts/data_version.py
+
+      - name: 提交版本文件（data/version.json）
+        shell: bash
+        run: |
+          git config user.name "lever-gaokao-bot"
+          git config user.email "bot@lever-gaokao.local"
+          git add data/version.json
+          if git diff --cached --quiet; then
+            echo "版本无变化"
+          else
+            git commit -m "chore(data): update data version $(python -c "import json;print(json.load(open('data/version.json'))['data_version'])")"
+            git push origin main
+          fi
+
+      # 数据包（duckdb + 版本 + 官方原文清单）打包为 artifact，供人工/发布用
+      - name: 打包数据包
+        shell: bash
+        run: |
+          mkdir -p dist-data
+          cp data/gaokao.duckdb dist-data/ 2>/dev/null || true
+          cp data/version.json dist-data/
+          cp -r official-sources dist-data/ 2>/dev/null || true
+          cd dist-data && sha256sum * > SHA256SUMS.txt 2>/dev/null || true
+
+      - name: 上传数据包
+        uses: actions/upload-artifact@v4
+        with:
+          name: liwei-data-package
+          path: dist-data/*

@@ -1,0 +1,168 @@
+{
+  "schema_version": 1,
+  "data_version": "2026.1",
+  "generated_at": "2026-08-15T00:53:49.970954+00:00",
+  "coverage": {
+    "school_dim": {
+      "全国": [
+        2025
+      ]
+    },
+    "score_range": {
+      "北京": [
+        2026
+      ],
+      "山东": [
+        2024,
+        2026
+      ],
+      "贵州": [
+        2026
+      ],
+      "辽宁": [
+        2026
+      ]
+    },
+    "admission_school": {
+      "山东": [
+        2024
+      ]
+    },
+    "admission_major": {
+      "山东": [
+        2024
+      ]
+    },
+    "enrollment_plan": {
+      "山东": [
+        2024
+      ]
+    },
+    "toudang": {
+      "山东": [
+        2026
+      ],
+      "浙江": [
+        2026
+      ]
+    }
+  },
+  "sources": [
+    {
+      "name": "教育部2025全国普通高等学校名单（zmex整理）",
+      "type": "开放数据",
+      "province": "全国",
+      "year": 2025,
+      "data_type": "school_dim",
+      "verified": true
+    },
+    {
+      "name": "北京教育考试院 2026 考生分数分布",
+      "type": "当年官方",
+      "province": "北京",
+      "year": 2026,
+      "data_type": "score_range",
+      "verified": false
+    },
+    {
+      "name": "Gaokao-Compass-11M",
+      "type": "开放数据",
+      "province": "山东",
+      "year": 2024,
+      "data_type": "score_range",
+      "verified": false
+    },
+    {
+      "name": "Gaokao-Compass-11M",
+      "type": "开放数据",
+      "province": "山东",
+      "year": 2024,
+      "data_type": "admission_school",
+      "verified": false
+    },
+    {
+      "name": "Gaokao-Compass-11M",
+      "type": "开放数据",
+      "province": "山东",
+      "year": 2024,
+      "data_type": "admission_major",
+      "verified": false
+    },
+    {
+      "name": "Gaokao-Compass-11M",
+      "type": "开放数据",
+      "province": "山东",
+      "year": 2024,
+      "data_type": "enrollment_plan",
+      "verified": false
+    },
+    {
+      "name": "山东考试院 2026 一分一段",
+      "type": "当年官方",
+      "province": "山东",
+      "year": 2026,
+      "data_type": "score_range",
+      "verified": true
+    },
+    {
+      "name": "山东考试院 2026 普通类常规批第1次志愿投档情况表",
+      "type": "当年官方",
+      "province": "山东",
+      "year": 2026,
+      "data_type": "专业投档线",
+      "verified": true
+    },
+    {
+      "name": "浙江省考试院 2026 第一段平行投档分数线表",
+      "type": "当年官方",
+      "province": "浙江",
+      "year": 2026,
+      "data_type": "专业投档线",
+      "verified": true
+    },
+    {
+      "name": "贵州教育考试院 2026 物理类一分一段",
+      "type": "当年官方",
+      "province": "贵州",
+      "year": 2026,
+      "data_type": "score_range",
+      "verified": false
+    },
+    {
+      "name": "贵州教育考试院 2026 历史类一分一段",
+      "type": "当年官方",
+      "province": "贵州",
+      "year": 2026,
+      "data_type": "score_range",
+      "verified": false
+    },
+    {
+      "name": "辽宁教育考试院 2026 物理类一分一段",
+      "type": "当年官方",
+      "province": "辽宁",
+      "year": 2026,
+      "data_type": "score_range",
+      "verified": false
+    },
+    {
+      "name": "辽宁教育考试院 2026 历史类一分一段",
+      "type": "当年官方",
+      "province": "辽宁",
+      "year": 2026,
+      "data_type": "score_range",
+      "verified": false
+    }
+  ],
+  "stats": {
+    "admission_major": 31626,
+    "admission_school": 4275,
+    "correction_log": 0,
+    "enrollment_plan": 10879,
+    "school_dim": 2919,
+    "score_range": 6878,
+    "shandong_toudang_2026": 23852,
+    "source_ledger": 13,
+    "zhejiang_toudang_2026": 18543,
+    "zhengcheng_chunks": 14
+  }
+}

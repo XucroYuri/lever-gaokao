@@ -57,7 +57,7 @@ screenshots/
 ocr/
 
 # Data layer (raw downloads, DuckDB files, validation reports)
-data/
+data/*
 *.duckdb
 *.duckdb.wal
 
@@ -93,6 +93,9 @@ private/
 !tsconfig.json
 !*.schema.json
 !.github/**/*.json
+
+# Data version file (数据版本清单需入库供客户端查更新；数据本体不入库)
+!data/version.json
 
 # AI agent config
 .claude/
