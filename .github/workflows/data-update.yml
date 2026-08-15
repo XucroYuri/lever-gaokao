@@ -56,8 +56,9 @@ jobs:
           if git diff --cached --quiet; then
             echo "版本无变化"
           else
-            git commit -m "chore(data): update data version $(python -c "import json;print(json.load(open('data/version.json'))['data_version'])")"
-            git push origin main
+            # 先同步远端（避免 push rejected），推送失败容错（下次运行重试）
+            git pull --rebase origin main --autostash || true
+            git push origin main || echo "[skip] 推送被拒（远端有更新），版本文件将在下次提交"
           fi
 
       # 数据包（duckdb + 版本 + 官方原文清单）打包
