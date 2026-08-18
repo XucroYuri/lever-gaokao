@@ -142,20 +142,6 @@ python3 lever-gaokao/scripts/ledger_tool.py validate-candidate-table candidates.
 
 如果你有更好的公益合作、数据建设、工具落地或使用传播建议，欢迎联系我。
 
-## 支持项目
-
-<!-- SUPPORT-PROJECT:START -->
-如果这个项目对你有帮助，可以自愿赞赏支持后续维护。赞赏不是付费咨询服务，也不构成任何结果承诺；请不要在转账备注中填写姓名、手机号、证件号等敏感信息。
-
-<p align="center">
-  <img src="https://raw.githubusercontent.com/XucroYuri/lever-gaokao/main/docs/assets/sponsor/alipay-card.png" alt="支付宝赞助二维码" width="260">
-  &nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="https://raw.githubusercontent.com/XucroYuri/lever-gaokao/main/docs/assets/sponsor/wechat-reward-card.png" alt="微信赞赏二维码" width="260">
-</p>
-
-<p align="center"><strong>时不我待，功不唐捐</strong></p>
-<!-- SUPPORT-PROJECT:END -->
-
 ## 源码开放但非商用
 
 本项目是公益导向的“源码开放、非商用”项目，不是 OSI 定义下的无限制开源项目。
