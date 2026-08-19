@@ -33,10 +33,12 @@ export function registerIntakeTool(ctx: Context): void {
       render: (_args, value) => [{ type: 'text', text: value }],
     },
     async execute(args, exec) {
-      // 工具参数为 JsonValue，过滤为字符串字典（用户回答都是文本）
+      // 工具参数为 JsonValue，统一转为字符串字典（用户回答可能是文本、数字或布尔）
       const collected: Record<string, string> = {}
       for (const [k, v] of Object.entries(args.collected ?? {})) {
-        if (typeof v === 'string') collected[k] = v
+        if (typeof v === 'string' || typeof v === 'number' || typeof v === 'boolean') {
+          collected[k] = String(v)
+        }
       }
       const state: IntakeState = { collected }
       const result = nextIntakeQuestions(state)

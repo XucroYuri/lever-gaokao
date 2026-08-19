@@ -28,6 +28,11 @@ python3 lever-gaokao/scripts/ledger_tool.py validate-candidate-table candidates.
 - `lever-gaokao/references/` — 7 reference docs: guided intake, methodology, candidate discovery, schema, communication style, data roadmap
 - `lever-gaokao/scripts/ledger_tool.py` — Mechanical table validation (no probability prediction)
 
+## Quality Bar
+- High-quality operation: ask before recommending, verify evidence, keep ledgers, don't fabricate.
+- High-quality output: conclusion first, show evidence/risks/next steps, use plain language, include disclaimers.
+- Before final delivery, run the checklist in `lever-gaokao/SKILL.md` → `高质量运行与输出质量门`.
+
 ## Key Philosophy
 - Finds undervalued opportunities, not just hot cities/majors
 - Adversarial review of first principles, evidence, and risks
